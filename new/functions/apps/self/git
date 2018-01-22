@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# Some variables may need change here
+# VERSION=2.14.1
+
+# Download function for ease of reuse
+function install_git {
+  display_info 'Downloading '$NAME'...'
+  curl -O https://www.kernel.org/pub/software/scm/git/git-${VERSION}.tar.gz
+  # Install package(s)
+  display_info 'Installing '$NAME'...'
+  elevate_privilege "apt-get install -fy zlib1g-dev"
+  tar -xzvf git-${VERSION}.tar.gz
+  cd git-${VERSION}
+  chmod +x configure
+  ./configure
+  make
+  elevate_privilege "make install"
+
+  # Cleanup and finish
+  cd .. # back to git-${VERSION}
+  cd .. # back to the top directory
+  rm -rf git-${VERSION}.tar.gz
+  rm -rf git-${VERSION}
+  display_success "Installation of '$PACKAGE' complete."
+}
+
+# install git using the tar.gz
+function git {
+  # Variables
+  NAME="git"
+  PACKAGE=git
+  VERSION=2.14.1
+  # Install
+  display_header 'Begin '$NAME' installation'
+  # Check if package is installed
+  check_packages $PACKAGE
+  exitstatus=$?
+  # If package is not installed
+  if [ $exitstatus = 1 ]; then
+    display_info $NAME 'is not installed.'
+    echo 'Proceeding'
+    install_git
+    whiptail --title "Finished" --msgbox "Installation $NAME complete." 8 64
+  else
+    # Already installed
+    display_info $NAME 'already installed.'
+    whiptail --title "Finished" --msgbox "$NAME is already installed." 8 64
+  fi
+  thirdparty_packages
+}

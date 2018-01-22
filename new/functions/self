@@ -1,0 +1,111 @@
+#!/bin/bash
+
+# When adding (or removing) any functions remember to update the
+# source list and function below to reflect any changes you make
+
+dir=$(dirname "$0")
+
+# Import apps functions
+source $dir/functions/apps/self/google-chrome
+source $dir/functions/apps/self/sublime-text
+source $dir/functions/apps/self/git
+source $dir/functions/apps/self/sogou
+source $dir/functions/apps/self/ros
+source $dir/functions/apps/self/foxitreader
+source $dir/functions/apps/self/wps
+source $dir/functions/apps/self/zotero
+source $dir/functions/apps/self/nutstore
+source $dir/functions/apps/self/goldendict
+source $dir/functions/apps/self/netease_cloudmusic
+# source $dir/functions/apps/self/clion
+
+# the following three contains self config
+source $dir/functions/apps/self/zsh
+source $dir/functions/apps/self/vim
+source $dir/functions/apps/self/spacemacs
+
+# Install Third-Party-Package Applications
+function thirdparty_packages {
+  display_title "Starting 'thirdparty_packages' function..."
+  # check exit status
+  exitstatus=$?
+  if [ $exitstatus = 0 ]; then
+    # Draw window
+    $(eval `resize` && whiptail \
+                         --notags \
+                         --title "Third-Party-Packages Applications" \
+                         --menu "\nWhich third-party app would you like to install?" \
+                         --ok-button "Install" \
+                         --cancel-button "Go Back" \
+                         32 96 16 \
+                         'google-chrome'	'Google Chrome' \
+                         'sublime-text'	  'Sublime Text 3' \
+                         'git'		        'Git from Source' \
+                         'sogou'          'Sogou Pinyin'
+                         3>&1 1>&2 2>&3)
+  else
+    self
+  fi
+}
+
+# Install preferred apt-get pakages
+function aptget_packages {
+  display_title "Starting 'aptget_packages' function..."
+  # Check list
+  SELF_APT_GET_PAG=$(dirname "$0")'/data/self-apt-get.list'
+  # Draw Window
+  if (eval `resize` && whiptail \
+                         --title "Self apt-get Applications" \
+                         --yesno "Current list of self apt-get applications to install: \n\n$(for LINE in $(cat $SELF_APT_GET_PAG); do echo '  '$LINE; done) \n\nProceed with installation?" \
+                         32 96 16 \
+                         --scrolltext) then
+     # Install loop
+     display_info 'Installing self apt-get applications...'
+     for PACKAGE in $(cat $SELF_APT_GET_PAG); do
+       # Check if package is installed
+       check_packages $PACKAGE
+       exitstatus=$?
+       # If package is not installed
+       if [ $exitstatus = 1 ]; then
+         # Install package
+         display_info "'$PACKAGE' is not installed. Installing..."
+         # Admin privileges
+         elevate_privilege "apt install -y --no-install-recommends $PACKAGE"
+         # Done
+         display_success "'$PACKAGE' installation is complete."
+       else
+         # Show already installed message
+         echo "Package '$PACKAGE' is installed."
+       fi
+     done
+     # Finish
+     display_success "Installation complete."
+     whiptail --title "Finished" --msgbox "Installation complete." 8 64
+     self
+     else
+       self
+  fi
+}
+
+
+# Install self Applications
+function self {
+  display_title "Starting 'self' function..."
+  # check exit status
+  exitstatus=$?
+  if [ $exitstatus = 0 ]; then
+    # Draw window
+    $(eval `resize` && whiptail \
+                         --notags \
+                         --title "Self Applications" \
+                         --menu "\nWhich app would you like to install?" \
+                         --ok-button "Install" \
+                         --cancel-button "Go Back" \
+                         32 96 16 \
+                         aptget_packages "Install self apt-get software" \
+                         thirdparty_packages "Install self third-party software" \
+                         3>&1 1>&2 2>&3)
+  else
+    main
+  fi
+}

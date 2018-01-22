@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Some variables may need change here
+# VERSION=2.14.1
+
+# Download function for ease of reuse
+function install_sogou{
+  display_info 'Downloading '$NAME'...'
+  curl -o sogoupinyin.deb http://cdn2.ime.sogou.com/dl/index/1491565850/sogoupinyin_2.1.0.0086_amd64.deb?st=LUZqCvB9EsfSCsmWBhX_wg&e=1503323672&fn=sogoupinyin_2.1.0.0086_amd64.deb
+  # Install package(s)
+  display_info 'Installing '$NAME'...'
+  elevate_privilege "dpkg -i sogoupinyin.deb"
+
+  # Cleanup and finish
+  rm -rf sogoupinyin.deb
+  display_success "Installation of '$PACKAGE' complete."
+}
+
+# install git using the tar.gz
+function sogou {
+  # Variables
+  NAME="sogou"
+  PACKAGE=sogou
+  VERSION=
+  # Install
+  display_header 'Begin '$NAME' installation'
+  # Check if package is installed
+  check_packages $PACKAGE
+  exitstatus=$?
+  # If package is not installed
+  if [ $exitstatus = 1 ]; then
+    display_info $NAME 'is not installed.'
+    echo 'Proceeding'
+    install_sogou
+    whiptail --title "Finished" --msgbox "Installation $NAME complete." 8 64
+  else
+    # Already installed
+    display_info $NAME 'already installed.'
+    whiptail --title "Finished" --msgbox "$NAME is already installed." 8 64
+  fi
+  thirdparty_packages
+}
