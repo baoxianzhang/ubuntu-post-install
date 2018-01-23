@@ -1,4 +1,3 @@
-g++
 python
 build-essential
 curl
@@ -6,14 +5,12 @@ xsel
 trash-cli
 exuberant-ctags
 silversearcher-ag
-terminator
 rar
 unzip
 tmux
 openssh-client
 openssh-server
 ranger
-ksnapshot
 markdown
 nautilus-open-terminal
-iptux
+meld
