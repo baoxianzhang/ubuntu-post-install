@@ -42,6 +42,7 @@ dir=$(dirname "$0")
 . $dir/functions/thirdparty
 . $dir/functions/update
 . $dir/functions/utilities
+. $dir/functions/self
 
 
 # Fancy colorful echo messages
@@ -84,6 +85,7 @@ function main {
 		--menu "\nWhat would you like to do?" \
 		--cancel-button "Quit" \
 		$LINES $COLUMNS $(( $LINES - 12 )) \
+		self        'Install self preferred software' \
 		update		'Perform system update' \
 		favs		'Install preferred applications' \
 		utilities	'Install preferred CLI utilities' \

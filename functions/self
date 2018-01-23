@@ -26,7 +26,7 @@ source $dir/functions/apps/self/spacemacs
 
 # Install Third-Party-Package Applications
 function thirdparty_packages {
-  display_title "Starting 'thirdparty_packages' function..."
+  echo_message title "Starting 'thirdparty_packages' function..."
   # check exit status
   exitstatus=$?
   if [ $exitstatus = 0 ]; then
@@ -50,17 +50,17 @@ function thirdparty_packages {
 
 # Install preferred apt-get pakages
 function aptget_packages {
-  display_title "Starting 'aptget_packages' function..."
+  echo_message title "Starting 'aptget_packages' function..."
   # Check list
   SELF_APT_GET_PAG=$(dirname "$0")'/data/self-apt-get.list'
   # Draw Window
-  if (eval `resize` && whiptail \
-                         --title "Self apt-get Applications" \
-                         --yesno "Current list of self apt-get applications to install: \n\n$(for LINE in $(cat $SELF_APT_GET_PAG); do echo '  '$LINE; done) \n\nProceed with installation?" \
-                         32 96 16 \
-                         --scrolltext) then
+	if (eval `resize` && whiptail \
+		--title "Preferred Applications" \
+		--yesno "Current list of preferred applications to install: \n\n$(for LINE in $(cat $SELF_APT_GET_PAG); do echo '  '$LINE; done) \n\nProceed with installation?" \
+		$LINES $COLUMNS $(( $LINES - 12 )) \
+		--scrolltext) then
      # Install loop
-     display_info 'Installing self apt-get applications...'
+     echo_message info 'Installing self apt-get applications...'
      for PACKAGE in $(cat $SELF_APT_GET_PAG); do
        # Check if package is installed
        check_packages $PACKAGE
@@ -68,18 +68,18 @@ function aptget_packages {
        # If package is not installed
        if [ $exitstatus = 1 ]; then
          # Install package
-         display_info "'$PACKAGE' is not installed. Installing..."
+         echo_message info "'$PACKAGE' is not installed. Installing..."
          # Admin privileges
          elevate_privilege "apt install -y --no-install-recommends $PACKAGE"
          # Done
-         display_success "'$PACKAGE' installation is complete."
+         echo_message success "'$PACKAGE' installation is complete."
        else
          # Show already installed message
          echo "Package '$PACKAGE' is installed."
        fi
      done
      # Finish
-     display_success "Installation complete."
+     echo_message success "Installation complete."
      whiptail --title "Finished" --msgbox "Installation complete." 8 64
      self
      else
@@ -90,21 +90,21 @@ function aptget_packages {
 
 # Install self Applications
 function self {
-  display_title "Starting 'self' function..."
+  echo_message title "Starting 'self' function..."
   # check exit status
   exitstatus=$?
   if [ $exitstatus = 0 ]; then
     # Draw window
     $(eval `resize` && whiptail \
-                         --notags \
-                         --title "Self Applications" \
-                         --menu "\nWhich app would you like to install?" \
-                         --ok-button "Install" \
-                         --cancel-button "Go Back" \
-                         32 96 16 \
-                         aptget_packages "Install self apt-get software" \
-                         thirdparty_packages "Install self third-party software" \
-                         3>&1 1>&2 2>&3)
+    --notags \
+    --title "Self Applications" \
+    --menu "\nWhich app would you like to install?" \
+    --ok-button "Install" \
+    --cancel-button "Go Back" \
+		$LINES $COLUMNS $(( $LINES - 12 )) \
+    aptget_packages "Install self apt-get software" \
+    thirdparty_packages "Install self third-party software" \
+    3>&1 1>&2 2>&3)
   else
     main
   fi
