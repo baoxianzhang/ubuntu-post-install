@@ -22,15 +22,14 @@ source $dir/functions/apps/self/cmake
 source $dir/functions/apps/self/chrome
 source $dir/functions/apps/self/autojump
 
-source $dir/functions/apps/self/wps
-source $dir/functions/apps/self/xmind
-source $dir/functions/apps/self/zotero
-source $dir/functions/apps/self/nutstore
-source $dir/functions/apps/self/goldendict
-source $dir/functions/apps/self/virtualbox
-source $dir/functions/apps/self/foxitreader
+# source $dir/functions/apps/self/wps
+# source $dir/functions/apps/self/xmind
+# source $dir/functions/apps/self/zotero
+# source $dir/functions/apps/self/nutstore
+# source $dir/functions/apps/self/goldendict
+# source $dir/functions/apps/self/foxitreader
 # source $dir/functions/apps/self/sublime_text
-source $dir/functions/apps/self/netease_cloudmusic
+# source $dir/functions/apps/self/netease_cloudmusic
 # source $dir/functions/apps/self/clion
 
 # Install Third-Party-Package Applications
@@ -50,7 +49,16 @@ function thirdparty_packages {
     'git'		        'Git from Source' \
     'myfile'		    'Self config file' \
     'chrome'	      'Google Chrome' \
+    'sogou'	        'sogou input method' \
     'cmake'	        'cmake build tool' \
+    'zsh'	          'oh-my-zsh' \
+    'vim'	          'spf13-vim' \
+    'tmux'	        'tmux' \
+    'spacemacs'	    'spacemacs' \
+    'fzf'	          'fzf' \
+    'ros'	          'ros' \
+    'gtag'	        'gtag tool' \
+    'autojump'	    'autojump tool' \
     3>&1 1>&2 2>&3)
   else
     self
