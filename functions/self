@@ -5,31 +5,33 @@
 
 dir=$(dirname "$0")
 
+# the following three contains self config
+source $dir/functions/apps/self/git
+source $dir/functions/apps/self/zsh
+source $dir/functions/apps/self/vim
+source $dir/functions/apps/self/tmux
+source $dir/functions/apps/self/myfile
+source $dir/functions/apps/self/spacemacs
+
 # Import apps functions
 source $dir/functions/apps/self/fzf
 source $dir/functions/apps/self/ros
 source $dir/functions/apps/self/gtag
 source $dir/functions/apps/self/sogou
 source $dir/functions/apps/self/cmake
+source $dir/functions/apps/self/chrome
 source $dir/functions/apps/self/autojump
-source $dir/functions/apps/self/google-chrome
 
 source $dir/functions/apps/self/wps
+source $dir/functions/apps/self/xmind
 source $dir/functions/apps/self/zotero
 source $dir/functions/apps/self/nutstore
 source $dir/functions/apps/self/goldendict
 source $dir/functions/apps/self/virtualbox
 source $dir/functions/apps/self/foxitreader
-source $dir/functions/apps/self/sublime-text
+# source $dir/functions/apps/self/sublime_text
 source $dir/functions/apps/self/netease_cloudmusic
 # source $dir/functions/apps/self/clion
-
-# the following three contains self config
-source $dir/functions/apps/self/zsh
-source $dir/functions/apps/self/vim
-source $dir/functions/apps/self/git
-source $dir/functions/apps/self/tmux
-source $dir/functions/apps/self/spacemacs
 
 # Install Third-Party-Package Applications
 function thirdparty_packages {
@@ -45,10 +47,11 @@ function thirdparty_packages {
     --ok-button "Install" \
     --cancel-button "Go Back" \
 		$LINES $COLUMNS $(( $LINES - 12 )) \
-    'google-chrome'	'Google Chrome' \
-    'sublime-text'	  'Sublime Text 3' \
+    'myfile'		    'Self config file' \
     'git'		        'Git from Source' \
-    'sogou'          'Sogou Pinyin'  \
+    'chrome'	      'Google Chrome' \
+    'sublime-text'	'Sublime Text 3' \
+    'sogou'         'Sogou Pinyin'  \
     3>&1 1>&2 2>&3)
   else
     self

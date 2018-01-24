@@ -1,39 +1,28 @@
 #!/bin/bash
 
 # Download function for ease of reuse
-function install_git {
+function install_cmake{
   echo_message info 'Downloading '$NAME'...'
-  curl -O https://codeload.github.com/git/git/zip/master
+  curl -O https://codeload.github.com/Kitware/CMake/zip/master
   # Install package(s)
   echo_message info 'Installing '$NAME'...'
-  elevate_privilege "apt-get install -fy zlib1g-dev"
   unzip master
-  cd git-mater
-  make prefix=/usr/local all doc info
-  elevate_privilege "make prefix=/usr/local install install-doc install-html install-info"
-  # elevate_privilege "make install"
+  cd CMake-mater
+  ./bootstrap --prefix=/usr/local && make
+  elevate_privilege "make install"
 
   # Cleanup and finish
   cd .. # back to the top directory
   rm -rf master
-  rm -rf git-master
-
-  echo_message info 'Configure '$NAME'...'
-  git config --global user.email "baoxianzhit@gmail.com"
-  git config --global user.name "baoxianzhang"
-  git config --global core.editor vim
-  git config --global push.default simple
-  git config --global alias.unstage "reset HEAD --"
-  git config --global alias.last "log -1 HEAD"
-
+  rm -rf CMake-master
   echo_message success "Installation of '$PACKAGE' complete."
 }
 
 # install git using the tar.gz
-function git {
+function cmake {
   # Variables
-  NAME="git"
-  PACKAGE=git
+  NAME="cmake"
+  PACKAGE=cmake
   # Install
   echo_message header 'Begin '$NAME' installation'
   # Check if package is installed
@@ -47,7 +36,7 @@ function git {
     whiptail --title "Finished" --msgbox "Installation $NAME complete." 8 64
   else
     # Already installed
-    echo_message $NAME 'already installed.'
+    echo_message info $NAME 'already installed.'
     whiptail --title "Finished" --msgbox "$NAME is already installed." 8 64
   fi
   thirdparty_packages
