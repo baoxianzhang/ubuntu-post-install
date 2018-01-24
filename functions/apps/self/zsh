@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Download function for ease of reuse
+function install_zsh{
+  echo_message info 'Installing '$NAME'...'
+  elevate_privilege "apt-get install -y zsh"
+  wget -nc https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
+  elvate_pricvilege "chsh -s /bin/zsh"
+  echo_message info "Logout to use zsh"
+  echo_message success "Installation of '$PACKAGE' complete."
+}
+
+# install git using the tar.gz
+function zsh {
+  # Variables
+  NAME="zsh"
+  PACKAGE=zsh
+  # Install
+  echo_message header 'Begin '$NAME' installation'
+  # Check if package is installed
+  check_packages $PACKAGE
+  exitstatus=$?
+  # If package is not installed
+  if [ $exitstatus = 1 ]; then
+    echo_message info $NAME 'is not installed.'
+    echo 'Proceeding'
+    install_zsh
+    whiptail --title "Finished" --msgbox "Installation $NAME complete." 8 64
+  else
+    # Already installed
+    echo_message $NAME 'already installed.'
+    whiptail --title "Finished" --msgbox "$NAME is already installed." 8 64
+  fi
+  thirdparty_packages
+}

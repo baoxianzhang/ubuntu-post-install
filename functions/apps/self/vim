@@ -1,0 +1,73 @@
+#!/bin/bash
+
+wget https://raw.githubusercontent.com/spf13/spf13-vim/3.0/bootstrap.sh
+chmod +x bootstrap.sh
+./bootstrap.sh
+
+# Download function for ease of reuse
+function install_vim{
+  echo_message info 'Installing '$NAME'...'
+  wget -nc -O vim.zip https://github.com/vim/vim/archive/master.zip
+  unzip -o vim.zip
+  mv vim-master vim
+
+  elevate_privilege "apt-get remove -y --purge vim vim-runtime vim-gnome vim-tiny vim-common vim-gui-common"
+  elevate_privilege "apt-get build-dep vim-gnome"
+  elevate_privilege "apt-get install -y liblua5.1-dev luajit libluajit-5.1 python-dev ruby-dev libperl-dev libncurses5-dev libgnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev"
+  elevate_privilege "rm -rf /usr/local/share/vim"
+  elevate_privilege "rm -rf /usr/bin/vim"
+  elevate_privilege "mkdir /usr/include/lua5.1/include/"
+  elevate_privilege "mv /usr/include/lua5.1/*.h /usr/include/lua5.1/include/"
+  elevate_privilege "ln -s /usr/bin/luajit-2.0.0-beta9 /usr/bin/luajit"
+  cd vim/src
+  make distclean
+  ./configure --with-features=huge \
+              --enable-rubyinterp \
+              --enable-largefile \
+              --disable-netbeans \
+              --enable-pythoninterp \
+              --with-python-config-dir=/usr/lib/python2.7/config \
+              --enable-perlinterp \
+              --enable-luainterp \
+              --with-luajit \
+              --enable-gui=auto \
+              --enable-fail-if-missing \
+              --with-lua-prefix=/usr/include/lua5.1 \
+              --enable-cscope
+  make
+  elevate_privilege "make install"
+
+  wget https://raw.githubusercontent.com/spf13/spf13-vim/3.0/bootstrap.sh
+  chmod +x bootstrap.sh
+  ./bootstrap.sh
+
+  # clean
+  cd ../..
+  rm vim.zip -rf
+  rm vim -rf
+
+  echo_message success "Installation of '$PACKAGE' complete."
+}
+
+function vim {
+  # Variables
+  NAME="vim"
+  PACKAGE=vim
+  # Install
+  echo_message header 'Begin '$NAME' installation'
+  # Check if package is installed
+  check_packages $PACKAGE
+  exitstatus=$?
+  # If package is not installed
+  if [ $exitstatus = 1 ]; then
+    echo_message info $NAME 'is not installed.'
+    echo 'Proceeding'
+    install_vim
+    whiptail --title "Finished" --msgbox "Installation $NAME complete." 8 64
+  else
+    # Already installed
+    echo_message $NAME 'already installed.'
+    whiptail --title "Finished" --msgbox "$NAME is already installed." 8 64
+  fi
+  thirdparty_packages
+}

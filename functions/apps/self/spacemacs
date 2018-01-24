@@ -1,0 +1,65 @@
+#!/bin/bash
+
+# Download function for ease of reuse
+function install_spacemacs{
+  echo_message info 'Downloading '$NAME'...'
+  wget -nc http://ftpmirror.gnu.org/emacs/emacs-25.1.tar.gz
+  tar -xzvf emacs-25.1.tar.gz
+  cd emacs-25.1
+  sudo apt-get install -y libgtk2.0-dev
+  sleep 1
+  sudo apt-get install -y libxpm-dev
+  sleep 1
+  sudo apt-get install -y libncurses5-dev
+  sleep 1
+  sudo apt-get install -y libjpeg-dev
+  sleep 1
+  sudo apt-get install -y libgif-dev
+  sleep 1
+  sudo apt-get install -y libtiff5-dev
+  sleep 1
+  ./configure
+  make
+  sudo make install
+
+  # clean
+  cd ..
+  rm emacs-25.1 -rf
+  rm emacs-25.1.tar.gz
+
+  mkdir ~/bxgithub
+  cd ~/bxgithub
+  git clone https://github.com/syl20bnr/spacemacs.git
+  cd spacemacs
+  git checkout develop
+  rm -rf ~/.emacs.d
+  ln -s ~/bxgithub/spacemacs ~/.emacs.d
+
+  # Install package(s)
+  echo_message info 'Installing '$NAME'...'
+  echo_message success "Installation of '$PACKAGE' complete."
+}
+
+# install git using the tar.gz
+function spacemacs{
+  # Variables
+  NAME="spacemacs"
+  PACKAGE=spacemacs
+  # Install
+  echo_message header 'Begin '$NAME' installation'
+  # Check if package is installed
+  check_packages $PACKAGE
+  exitstatus=$?
+  # If package is not installed
+  if [ $exitstatus = 1 ]; then
+    echo_message info $NAME 'is not installed.'
+    echo 'Proceeding'
+    install_spacemacs
+    whiptail --title "Finished" --msgbox "Installation $NAME complete." 8 64
+  else
+    # Already installed
+    echo_message $NAME 'already installed.'
+    whiptail --title "Finished" --msgbox "$NAME is already installed." 8 64
+  fi
+  thirdparty_packages
+}

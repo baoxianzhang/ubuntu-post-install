@@ -1,0 +1,30 @@
+#!/bin/bash
+
+function install_git {
+  echo_message info 'Installing '$NAME'...'
+  elevate_privilege "apt-get install tmux"
+  echo_message success "Installation of '$PACKAGE' complete."
+}
+
+function tmux {
+  # Variables
+  NAME="tmux"
+  PACKAGE=tmux
+  # Install
+  echo_message header 'Begin '$NAME' installation'
+  # Check if package is installed
+  check_packages $PACKAGE
+  exitstatus=$?
+  # If package is not installed
+  if [ $exitstatus = 1 ]; then
+    echo_message info $NAME 'is not installed.'
+    echo 'Proceeding'
+    install_tmux
+    whiptail --title "Finished" --msgbox "Installation $NAME complete." 8 64
+  else
+    # Already installed
+    echo_message $NAME 'already installed.'
+    whiptail --title "Finished" --msgbox "$NAME is already installed." 8 64
+  fi
+  thirdparty_packages
+}
