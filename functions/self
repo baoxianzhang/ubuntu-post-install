@@ -47,11 +47,10 @@ function thirdparty_packages {
     --ok-button "Install" \
     --cancel-button "Go Back" \
 		$LINES $COLUMNS $(( $LINES - 12 )) \
-    'myfile'		    'Self config file' \
     'git'		        'Git from Source' \
+    'myfile'		    'Self config file' \
     'chrome'	      'Google Chrome' \
-    'sublime-text'	'Sublime Text 3' \
-    'sogou'         'Sogou Pinyin'  \
+    'cmake'	        'cmake build tool' \
     3>&1 1>&2 2>&3)
   else
     self
