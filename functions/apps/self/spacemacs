@@ -6,21 +6,15 @@ function install_spacemacs{
   wget -nc http://ftpmirror.gnu.org/emacs/emacs-25.1.tar.gz
   tar -xzvf emacs-25.1.tar.gz
   cd emacs-25.1
-  sudo apt-get install -y libgtk2.0-dev
-  sleep 1
-  sudo apt-get install -y libxpm-dev
-  sleep 1
-  sudo apt-get install -y libncurses5-dev
-  sleep 1
-  sudo apt-get install -y libjpeg-dev
-  sleep 1
-  sudo apt-get install -y libgif-dev
-  sleep 1
-  sudo apt-get install -y libtiff5-dev
-  sleep 1
+  elevate_privilege "apt-get install -y libgtk2.0-dev"
+  elevate_privilege "apt-get install -y libxpm-dev"
+  elevate_privilege "apt-get install -y libncurses5-dev"
+  elevate_privilege "apt-get install -y libjpeg-dev"
+  elevate_privilege "apt-get install -y libgif-dev"
+  elevate_privilege "apt-get install -y libtiff5-dev"
   ./configure
   make
-  sudo make install
+  elevate_privilege "make install"
 
   # clean
   cd ..
