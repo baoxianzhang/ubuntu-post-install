@@ -1,30 +1,29 @@
 #!/bin/bash
 
 # Download function for ease of reuse
-function install_zsh{
+function install_fzf{
   echo_message info 'Installing '$NAME'...'
-  elevate_privilege "apt-get install -y zsh"
-  wget -nc https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
-  elvate_privilege "chsh -s /bin/zsh"
-  echo_message info "Logout to use zsh"
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  ~/.fzf/install
   echo_message success "Installation of '$PACKAGE' complete."
 }
 
-# install git using the tar.gz
-function zsh {
+function fzf{
   # Variables
-  NAME="zsh"
-  PACKAGE=zsh
+  NAME="fzf"
+  PACKAGE=fzf
   # Install
   echo_message header 'Begin '$NAME' installation'
   # Check if package is installed
-  check_packages $PACKAGE
-  exitstatus=$?
+  exitstatus=1 #not exit
+  if[ ! -d ~/bxgithub/.fzf]; then
+    exitstatus=0
+  fi
   # If package is not installed
   if [ $exitstatus = 1 ]; then
     echo_message info $NAME 'is not installed.'
     echo 'Proceeding'
-    install_zsh
+    install_fzf
     whiptail --title "Finished" --msgbox "Installation $NAME complete." 8 64
   else
     # Already installed

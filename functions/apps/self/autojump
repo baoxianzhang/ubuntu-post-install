@@ -1,20 +1,24 @@
 #!/bin/bash
 
 # Download function for ease of reuse
-function install_zsh{
+function install_autojump{
   echo_message info 'Installing '$NAME'...'
-  elevate_privilege "apt-get install -y zsh"
-  wget -nc https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
-  elvate_privilege "chsh -s /bin/zsh"
-  echo_message info "Logout to use zsh"
+  wget -nc https://github.com/downloads/joelthelion/autojump/autojump_v21.1.2.tar.gz
+  tar -xzvf autojump_v21.1.2.tar.gz
+  cd autojump_v21.1.2
+  ./install.sh
+
+  # clean
+  cd ..
+  rm -rf autojump_v21.1.2
+  rm -rf autojump_v21.1.2.tar.gz
   echo_message success "Installation of '$PACKAGE' complete."
 }
 
-# install git using the tar.gz
-function zsh {
+function autojump{
   # Variables
-  NAME="zsh"
-  PACKAGE=zsh
+  NAME="autojump"
+  PACKAGE=j
   # Install
   echo_message header 'Begin '$NAME' installation'
   # Check if package is installed
@@ -24,7 +28,7 @@ function zsh {
   if [ $exitstatus = 1 ]; then
     echo_message info $NAME 'is not installed.'
     echo 'Proceeding'
-    install_zsh
+    install_autojump
     whiptail --title "Finished" --msgbox "Installation $NAME complete." 8 64
   else
     # Already installed

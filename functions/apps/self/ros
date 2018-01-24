@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# Download function for ease of reuse
+function install_ros{
+  echo_message info 'Installing '$NAME'...'
+  elvate_privilege "sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list' "
+  elvate_privilege "apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116"
+  # elvate_privilege "apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116"
+  # elvate_privileage "apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116"
+  elvate_privilege "apt-get update"
+  elvate_privilege "apt-get -y -q install ros-$ROSDISTRO-desktop-full ros-$ROSDISTRO-catkin  ros-$ROSDISTRO-rosbash"
+  elvate_privilege "apt-get -y -q install python-wstool python-rosdep python-catkin-tools"
+  rosdep init;
+  rosdep update
+  echo_message success "Installation of '$PACKAGE' complete."
+}
+
+function ros{
+  # Variables
+  NAME="ros"
+  PACKAGE=ros
+  # Install
+  echo_message header 'Begin '$NAME' installation'
+  # Check if package is installed
+  check_packages $PACKAGE
+  exitstatus=$?
+  # If package is not installed
+  if [ $exitstatus = 1 ]; then
+    echo_message info $NAME 'is not installed.'
+    echo 'Proceeding'
+    install_ros
+    whiptail --title "Finished" --msgbox "Installation $NAME complete." 8 64
+  else
+    # Already installed
+    echo_message $NAME 'already installed.'
+    whiptail --title "Finished" --msgbox "$NAME is already installed." 8 64
+  fi
+  thirdparty_packages
+}
