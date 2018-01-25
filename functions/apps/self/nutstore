@@ -1,21 +1,22 @@
 #!/bin/bash
 
-function install_sogou {
-  echo_message info 'Downloading '$NAME'...'
-  wget -O sogoupinyin_amd64.deb http://cdn2.ime.sogou.com/dl/index/1509619794/sogoupinyin_2.2.0.0102_amd64.deb\?st\=MSv-W3DzFHp2LKX-AzRtAw\&e\=1516781430\&fn\=sogoupinyin_2.2.0.0102_amd64.deb
-  # Install package(s)
-  echo_message info 'Installing '$NAME'...'
-  elevate_privilege "dpkg -i sogoupinyin_amd64.deb"
+# Download function for ease of reuse
+function install_nutstore {
+	echo_message info 'Installing '$NAME'...'
+  wget -c https://www.jianguoyun.com/static/exe/installer/ubuntu/nautilus_nutstore_amd64.deb
+  elvate_privilege "dpkg -i nautilus_nutstore_amd64.deb"
+  elvate_privilege "apt-get install -f"
 
-  # Cleanup and finish
-  rm -rf sogoupinyin_amd64.deb
+  # clean
+  rm nautilus_nutstore_amd64.deb -rf
   echo_message success "Installation of '$PACKAGE' complete."
 }
 
-function sogou {
+# install git using the tar.gz
+function nutstore {
   # Variables
-  NAME="sogou"
-  PACKAGE=sogou
+  NAME="nutstore"
+  PACKAGE=nutstore
   # Install
   echo_message header 'Begin '$NAME' installation'
   # Check if package is installed
@@ -25,11 +26,11 @@ function sogou {
   if [ $exitstatus = 1 ]; then
     echo_message info $NAME 'is not installed.'
     echo 'Proceeding'
-    install_sogou
+    install_nutstore
     whiptail --title "Finished" --msgbox "Installation $NAME complete." 8 64
   else
     # Already installed
-    echo_message info $NAME 'already installed.'
+    echo_message $NAME 'already installed.'
     whiptail --title "Finished" --msgbox "$NAME is already installed." 8 64
   fi
   thirdparty_packages

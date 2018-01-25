@@ -26,10 +26,8 @@ source $dir/functions/apps/self/qt
 # source $dir/functions/apps/self/wps
 # source $dir/functions/apps/self/xmind
 # source $dir/functions/apps/self/zotero
-# source $dir/functions/apps/self/nutstore
-# source $dir/functions/apps/self/goldendict
-# source $dir/functions/apps/self/foxitreader
-# source $dir/functions/apps/self/sublime_text
+source $dir/functions/apps/self/nutstore
+source $dir/functions/apps/self/sublime_text
 # source $dir/functions/apps/self/netease_cloudmusic
 # source $dir/functions/apps/self/clion
 
@@ -61,6 +59,8 @@ function thirdparty_packages {
                          'gtag'         'gtag tool' \
                          'autojump'     'autojump tool' \
                          'qt'           'qt5' \
+                         # 'zotero'       'zotero' \
+                         'nutstore'     'nutstore' \
                          3>&1 1>&2 2>&3)
   else
     self
