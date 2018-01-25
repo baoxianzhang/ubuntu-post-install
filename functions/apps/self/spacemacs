@@ -29,6 +29,18 @@ function install_spacemacs {
   rm -rf ~/.emacs.d
   ln -s ~/bxgithub/spacemacs ~/.emacs.d
 
+  # install tern
+  elevate_privilege "apt-get install -y npm"
+  elevate_privilege "sudo npm install -g tern"
+
+  # install source-code-pro
+  wget -c https://www.fontsquirrel.com/fonts/download/source-code-pro
+  FONT_PATH=/usr/share/fonts/opentype
+  elevate_privilege "mkdir $FONT_PATH"
+  unzip source-code-pro -d $FONT_PATH
+  cd $FONT_PATH
+  elevate_privilege "fc-cache -f -v"
+
   # Install package(s)
   echo_message info 'Installing '$NAME'...'
   echo_message success "Installation of '$PACKAGE' complete."
