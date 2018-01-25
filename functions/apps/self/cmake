@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Download function for ease of reuse
-function install_cmake{
+function install_cmake {
   echo_message info 'Downloading '$NAME'...'
   curl -O https://codeload.github.com/Kitware/CMake/zip/master
   # Install package(s)
   echo_message info 'Installing '$NAME'...'
   unzip master
-  cd CMake-mater
+  cd CMake-master
   ./bootstrap --prefix=/usr/local && make
   elevate_privilege "make install"
 

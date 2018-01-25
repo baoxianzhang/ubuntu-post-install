@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Download function for ease of reuse
-function install_spacemacs{
+function install_spacemacs {
   echo_message info 'Downloading '$NAME'...'
   wget -nc http://ftpmirror.gnu.org/emacs/emacs-25.1.tar.gz
   tar -xzvf emacs-25.1.tar.gz
@@ -35,7 +35,7 @@ function install_spacemacs{
 }
 
 # install git using the tar.gz
-function spacemacs{
+function spacemacs {
   # Variables
   NAME="spacemacs"
   PACKAGE=spacemacs

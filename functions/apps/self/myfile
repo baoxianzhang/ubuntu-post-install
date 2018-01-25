@@ -1,29 +1,30 @@
 #!/bin/bash
 
 # Download function for ease of reuse
+
 function install_myfile {
   echo_message info 'Downloading '$NAME'...'
-  mkdir -p ~/bxgithub
-  cd ~/bxgithub
+  mkdir -p $HOME/bxgithub
+  cd $HOME/bxgithub
   git clone https://github.com/baoxianzhang/myfile.git
 
   # softlink zsh
-  rm -f ~/.zshrc
-  ln -s ~/bxgithub/myfile/zshrc ~/.zshrc
+  rm -f $HOME/.zshrc
+  ln -s $HOME/bxgithub/myfile/zshrc $HOME/.zshrc
 
   # spacemacs.d
-  rm -rf ~/.spacemacs.d
-  ln -s ~/bxgithub/myfile/spacemacs.d ~/.spacemacs.d
+  rm -rf $HOME/.spacemacs.d
+  ln -s $HOME/bxgithub/myfile/spacemacs.d $HOME/.spacemacs.d
 
   # tmux
-  rm -rf ~/.tmux.conf
-  ln -s ~/bxgithub/myfile/tmux.conf ~/.tmux.conf
+  rm -rf $HOME/.tmux.conf
+  ln -s $HOME/bxgithub/myfile/tmux.conf $HOME/.tmux.conf
 
   # spf13 vim
-  rm -rf ~/.vimrc.before.local
-  ln -s ~/bxgithub/myfile/vimrc.before.local ~/.vimrc.before.local
-  rm -rf ~/.vimrc.bundles.local
-  ln -s ~/bxgithub/myfile/vimrc.bundles.local ~/.vimrc.bundles.local
+  rm -rf $HOME/.vimrc.before.local
+  ln -s $HOME/bxgithub/myfile/vimrc.before.local $HOME/.vimrc.before.local
+  rm -rf $HOME/.vimrc.bundles.local
+  ln -s $HOME/bxgithub/myfile/vimrc.bundles.local $HOME/.vimrc.bundles.local
 
   # Install package(s)
   echo_message info 'Installing '$NAME'...'
@@ -38,8 +39,8 @@ function myfile {
   # Install
   echo_message header 'Begin '$NAME' installation'
   # Check if package is installed
-  exitstatus=1 #not exit
-  if[ ! -d ~/bxgithub/myfile ]; then
+  exitstatus=1
+  if [ ! -d $HOME/bxgithub/myfile ]; then
     exitstatus=0
   fi
   # If package is not installed

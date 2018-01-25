@@ -1,14 +1,14 @@
 #!/bin/bash
 
 # Download function for ease of reuse
-function install_fzf{
+function install_fzf {
   echo_message info 'Installing '$NAME'...'
   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
   ~/.fzf/install
   echo_message success "Installation of '$PACKAGE' complete."
 }
 
-function fzf{
+function fzf {
   # Variables
   NAME="fzf"
   PACKAGE=fzf
@@ -16,11 +16,11 @@ function fzf{
   echo_message header 'Begin '$NAME' installation'
   # Check if package is installed
   exitstatus=1 #not exit
-  if[ ! -d ~/bxgithub/.fzf]; then
+  if [ ! -d $HOME/.fzf ] ; then
     exitstatus=0
   fi
   # If package is not installed
-  if [ $exitstatus = 1 ]; then
+  if [ $exitstatus = 1 ] ; then
     echo_message info $NAME 'is not installed.'
     echo 'Proceeding'
     install_fzf

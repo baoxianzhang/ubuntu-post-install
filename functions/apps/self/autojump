@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Download function for ease of reuse
-function install_autojump{
+function install_autojump {
   echo_message info 'Installing '$NAME'...'
   wget -nc https://github.com/downloads/joelthelion/autojump/autojump_v21.1.2.tar.gz
   tar -xzvf autojump_v21.1.2.tar.gz
@@ -15,7 +15,7 @@ function install_autojump{
   echo_message success "Installation of '$PACKAGE' complete."
 }
 
-function autojump{
+function autojump {
   # Variables
   NAME="autojump"
   PACKAGE=j

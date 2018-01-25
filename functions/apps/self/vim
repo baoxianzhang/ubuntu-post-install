@@ -1,11 +1,7 @@
 #!/bin/bash
 
-wget https://raw.githubusercontent.com/spf13/spf13-vim/3.0/bootstrap.sh
-chmod +x bootstrap.sh
-./bootstrap.sh
-
 # Download function for ease of reuse
-function install_vim{
+function install_vim {
   echo_message info 'Installing '$NAME'...'
   wget -nc -O vim.zip https://github.com/vim/vim/archive/master.zip
   unzip -o vim.zip
@@ -40,6 +36,7 @@ function install_vim{
   wget https://raw.githubusercontent.com/spf13/spf13-vim/3.0/bootstrap.sh
   chmod +x bootstrap.sh
   ./bootstrap.sh
+  rm bootstrap.sh
 
   # clean
   cd ../..

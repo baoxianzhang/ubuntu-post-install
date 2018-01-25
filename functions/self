@@ -40,26 +40,26 @@ function thirdparty_packages {
   if [ $exitstatus = 0 ]; then
     # Draw window
     $(eval `resize` && whiptail \
-    --notags \
-    --title "Third-Party-Packages Applications" \
-    --menu "\nWhich third-party app would you like to install?" \
-    --ok-button "Install" \
-    --cancel-button "Go Back" \
-		$LINES $COLUMNS $(( $LINES - 12 )) \
-    'git'		        'Git from Source' \
-    'myfile'		    'Self config file' \
-    'chrome'	      'Google Chrome' \
-    'sogou'	        'sogou input method' \
-    'cmake'	        'cmake build tool' \
-    'zsh'	          'oh-my-zsh' \
-    'vim'	          'spf13-vim' \
-    'tmux'	        'tmux' \
-    'spacemacs'	    'spacemacs' \
-    'fzf'	          'fzf' \
-    'ros'	          'ros' \
-    'gtag'	        'gtag tool' \
-    'autojump'	    'autojump tool' \
-    3>&1 1>&2 2>&3)
+                         --notags \
+                         --title "Third-Party-Packages Applications" \
+                         --menu "\nWhich third-party app would you like to install?" \
+                         --ok-button "Install" \
+                         --cancel-button "Go Back" \
+                         $LINES $COLUMNS $(( $LINES - 12 )) \
+                         'git'            'Git from Source' \
+                         'myfile'       'Self config file' \
+                         'chrome'       'Google Chrome' \
+                         'sogou'          'sogou input method' \
+                         'cmake'          'cmake build tool' \
+                         'zsh'            'oh-my-zsh' \
+                         'vim'            'spf13-vim' \
+                         'tmux'         'tmux' \
+                         'spacemacs'      'spacemacs' \
+                         'fzf'            'fzf' \
+                         'ros'            'ros' \
+                         'gtag'         'gtag tool' \
+                         'autojump'     'autojump tool' \
+                         3>&1 1>&2 2>&3)
   else
     self
   fi
@@ -71,11 +71,11 @@ function aptget_packages {
   # Check list
   SELF_APT_GET_PAG=$(dirname "$0")'/data/self-apt-get.list'
   # Draw Window
-	if (eval `resize` && whiptail \
-		--title "Preferred Applications" \
-		--yesno "Current list of preferred applications to install: \n\n$(for LINE in $(cat $SELF_APT_GET_PAG); do echo '  '$LINE; done) \n\nProceed with installation?" \
-		$LINES $COLUMNS $(( $LINES - 12 )) \
-		--scrolltext) then
+  if (eval `resize` && whiptail \
+                         --title "Preferred Applications" \
+                         --yesno "Current list of preferred applications to install: \n\n$(for LINE in $(cat $SELF_APT_GET_PAG); do echo '  '$LINE; done) \n\nProceed with installation?" \
+                         $LINES $COLUMNS $(( $LINES - 12 )) \
+                         --scrolltext) then
      # Install loop
      echo_message info 'Installing self apt-get applications...'
      for PACKAGE in $(cat $SELF_APT_GET_PAG); do
@@ -99,8 +99,8 @@ function aptget_packages {
      echo_message success "Installation complete."
      whiptail --title "Finished" --msgbox "Installation complete." 8 64
      self
-     else
-       self
+  else
+     self
   fi
 }
 
@@ -113,15 +113,15 @@ function self {
   if [ $exitstatus = 0 ]; then
     # Draw window
     $(eval `resize` && whiptail \
-    --notags \
-    --title "Self Applications" \
-    --menu "\nWhich app would you like to install?" \
-    --ok-button "Install" \
-    --cancel-button "Go Back" \
-		$LINES $COLUMNS $(( $LINES - 12 )) \
-    aptget_packages "Install self apt-get software" \
-    thirdparty_packages "Install self third-party software" \
-    3>&1 1>&2 2>&3)
+                         --notags \
+                         --title "Self Applications" \
+                         --menu "\nWhich app would you like to install?" \
+                         --ok-button "Install" \
+                         --cancel-button "Go Back" \
+                         $LINES $COLUMNS $(( $LINES - 12 )) \
+                         aptget_packages "Install self apt-get software" \
+                         thirdparty_packages "Install self third-party software" \
+                         3>&1 1>&2 2>&3)
   else
     main
   fi
