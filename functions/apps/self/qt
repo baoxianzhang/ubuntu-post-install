@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# Download function for ease of reuse
+function install_qt {
+  # https://wiki.qt.io/Install_Qt_5_on_Ubuntu
+	echo_message info 'Installing '$NAME'...'
+  # wget -c http://download.qt.io/official_releases/qt/5.7/5.7.0/qt-opensource-linux-x64-5.7.0.run
+  wget -c http://iso.mirrors.ustc.edu.cn/qtproject/archive/qt/5.10/5.10.0/qt-opensource-linux-x64-5.10.0.run
+  chmod +x qt-opensource-linux-x64-5.10.0.run
+  elevate_privilege "apt-get install -y build-essential"
+  elevate_privilege "apt-get install -y libfontconfig1"
+  elevate_privilege "apt-get install -y mesa-common-dev"
+  elevate_privilege "apt-get install -y libglu1-mesa-dev"
+  elevate_privilege "./qt-opensource-linux-x64-5.7.0.run"
+  rm qt-opensource-linux-x64-5.10.0.run
+  echo_message success "Installation of '$PACKAGE' complete."
+}
+
+function qt {
+  # Variables
+  NAME="qt"
+  PACKAGE=qt
+  # Install
+  echo_message header 'Begin '$NAME' installation'
+  # Check if package is installed
+  check_packages $PACKAGE
+  exitstatus=$?
+  # If package is not installed
+  if [ $exitstatus = 1 ]; then
+    echo_message info $NAME 'is not installed.'
+    echo 'Proceeding'
+    install_qt
+    whiptail --title "Finished" --msgbox "Installation $NAME complete." 8 64
+  else
+    # Already installed
+    echo_message $NAME 'already installed.'
+    whiptail --title "Finished" --msgbox "$NAME is already installed." 8 64
+  fi
+  thirdparty_packages
+}
