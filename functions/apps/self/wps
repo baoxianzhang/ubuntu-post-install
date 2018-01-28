@@ -1,17 +1,16 @@
 #!/bin/bash
 
 function install_wps {
-  echo_message info 'Not work yet'
-  # echo_message info 'Downloading '$NAME'...'
+  echo_message info 'Downloading '$NAME'...'
 
-  # wget -c http://kdl.cc.ksosoft.com/wps-community/download/a21/wps-office_10.1.0.5672~a21_amd64.deb -O wps-office_amd64.deb
+  wget -c http://kdl.cc.ksosoft.com/wps-community/download/a21/wps-office_10.1.0.5672~a21_amd64.deb -O wps-office_amd64.deb
 
   # Install package(s)
-  # echo_message info 'Installing '$NAME'...'
-  # elevate_privilege "dpkg -i wps-office_amd64.deb"
+  echo_message info 'Installing '$NAME'...'
+  elevate_privilege "dpkg -i wps-office_amd64.deb"
 
   # Cleanup and finish
-  # rm -rf wps-office_amd64.deb
+  rm -rf wps-office_amd64.deb
   echo_message success "Installation of '$PACKAGE' complete."
 }
 

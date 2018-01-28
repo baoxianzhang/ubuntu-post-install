@@ -1,5 +1,34 @@
 #!/bin/bash
 
+# Fancy colorful echo messages
+function echo_message(){
+	local color=$1;
+	local exp=$2;
+	if ! [[ $color =~ '^[0-9]$' ]] ; then
+		case $(echo -e $color | tr '[:upper:]' '[:lower:]') in
+			# 0 = black
+			title) color=0 ;;
+			# 1 = red
+			error) color=1 ;;
+			# 2 = green
+			info) color=2 ;;
+			# 3 = yellow
+			warning) color=3 ;;
+			# 4 = blue
+			question) color=4 ;;
+			# 5 = magenta
+			success) color=5 ;;
+			# 6 = cyan
+			header) color=6 ;;
+			# 7 = white
+			*) color=7 ;;
+		esac
+	fi
+	tput bold;
+	tput setaf $color;
+	echo $exp;
+	tput sgr0;
+}
 # Download function for ease of reuse
 function install_git {
   echo_message info 'Downloading '$NAME'...'
@@ -26,31 +55,7 @@ function install_git {
   git config --global alias.unstage "reset HEAD --"
   git config --global alias.last "log -1 HEAD"
 
-  echo_message success "Installation of '$PACKAGE' complete."
+  echo_message success "Installation of git complete."
 }
 
-# install git using the tar.gz
-function git {
-  # Variables
-  NAME="git"
-  PACKAGE=git
-  # Install
-  echo_message header 'Begin '$NAME' installation'
-  # Check if package is installed
-  # check_packages $PACKAGE
-  # exitstatus=$?
-  
-  exitstatus=1  # default is not install
-  # If package is not installed
-  if [ $exitstatus = 1 ]; then
-    echo_message info $NAME 'is not installed.'
-    echo 'Proceeding'
-    install_git
-    whiptail --title "Finished" --msgbox "Installation $NAME complete." 8 64
-  else
-    # Already installed
-    echo_message $NAME 'already installed.'
-    whiptail --title "Finished" --msgbox "$NAME is already installed." 8 64
-  fi
-  thirdparty_packages
-}
+install_git

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function install_git {
+function install_tmux {
   echo_message info 'Installing '$NAME'...'
   elevate_privilege "apt-get install tmux"
   echo_message success "Installation of '$PACKAGE' complete."
