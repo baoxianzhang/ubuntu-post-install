@@ -37,8 +37,10 @@ function git {
   # Install
   echo_message header 'Begin '$NAME' installation'
   # Check if package is installed
-  check_packages $PACKAGE
-  exitstatus=$?
+  # check_packages $PACKAGE
+  # exitstatus=$?
+  
+  exitstatus=1  # default is not install
   # If package is not installed
   if [ $exitstatus = 1 ]; then
     echo_message info $NAME 'is not installed.'
