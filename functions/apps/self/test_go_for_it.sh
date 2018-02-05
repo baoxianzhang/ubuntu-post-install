@@ -30,23 +30,11 @@ function echo_message(){
 	tput sgr0;
 }
 
-# Download function for ease of reuse
-function install_gtag {
-  echo_message info 'Installing '$NAME'...'
-  sudo apt-get install -y libsdl1.2-dev
-  sudo apt-get install -y ncurses-bin
-  sudo apt-get install -y libncurses5-dev
-  wget -nc http://tamacom.com/global/global-6.5.5.tar.gz
-  tar -xzvf global-6.5.5.tar.gz
-  cd global-6.5.5
-  ./configure
-  make
-  sudo make install
-  # clean
-  cd ..
-  rm global-6.5.5 -rf
-  rm global-6.5.5.tar.gz
-  echo_message success "Installation of gtag complete."
+function install_go_for_it {
+  sudo add-apt-repository ppa:mank319/go-for-it
+  sudo apt-get update
+  sudo apt-get install go-for-it
+  echo_message success "Installation of go-for-it complete."
 }
 
-install_gtag
+install_go_for_it

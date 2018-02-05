@@ -62,16 +62,17 @@ function install_vim {
               --enable-cscope
   make
   sudo "make install"
+  # clean
+  cd ../..
+  rm vim.zip -rf
+  rm vim -rf
+
+
 
   wget https://raw.githubusercontent.com/spf13/spf13-vim/3.0/bootstrap.sh
   chmod +x bootstrap.sh
   ./bootstrap.sh
   rm bootstrap.sh
-
-  # clean
-  cd ../..
-  rm vim.zip -rf
-  rm vim -rf
 
   echo_message success "Installation of vim complete."
 }

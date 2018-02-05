@@ -30,23 +30,17 @@ function echo_message(){
 	tput sgr0;
 }
 
-# Download function for ease of reuse
-function install_gtag {
-  echo_message info 'Installing '$NAME'...'
-  sudo apt-get install -y libsdl1.2-dev
-  sudo apt-get install -y ncurses-bin
-  sudo apt-get install -y libncurses5-dev
-  wget -nc http://tamacom.com/global/global-6.5.5.tar.gz
-  tar -xzvf global-6.5.5.tar.gz
-  cd global-6.5.5
-  ./configure
-  make
-  sudo make install
-  # clean
-  cd ..
-  rm global-6.5.5 -rf
-  rm global-6.5.5.tar.gz
-  echo_message success "Installation of gtag complete."
+function install_dtalk {
+  echo_message info 'Downloading dtalk ...'
+  wget -c https://raw.githubusercontent.com/duguxiao815/yunCms/215bc498a973c602a5589ffae8bcabc71b726591/dtalk.deb
+
+  # Install package(s)
+  echo_message info 'Installing dtalk ...'
+  sudo dpkg -i dtalk.deb
+
+  # Cleanup and finish
+  rm -rf dtalk.deb
+  echo_message success "Installation of dtalk complete."
 }
 
-install_gtag
+install_dtalk
