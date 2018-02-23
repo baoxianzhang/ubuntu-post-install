@@ -53,7 +53,7 @@ function install_libpointmatcher {
   make
   sudo make install
   cd ../..
-  rm libpointmatcher-master
+  rm libpointmatcher-master -rf
 
   # Cleanup and finish
   echo_message success "Installation of libpointmatcher complete."
