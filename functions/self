@@ -45,17 +45,16 @@ function thirdparty_packages {
                          --ok-button "Install" \
                          --cancel-button "Go Back" \
                          $LINES $COLUMNS $(( $LINES - 12 )) \
-                         'git'          'Git from Source' \
+                         'latest_git'          'Latest Git' \
+                         'zsh'          'oh-my-zsh' \
+                         'vim'          'spf13-vim' \
+                         'spacemacs'    'spacemacs' \
+                         'fzf'          'fzf' \
+                         'ros'          'ros' \
                          'myfile'       'Self config file' \
                          'chrome'       'Google Chrome' \
                          'sogou'        'sogou input method' \
                          'cmake'        'cmake build tool' \
-                         'zsh'          'oh-my-zsh' \
-                         'vim'          'spf13-vim' \
-                         'tmux'         'tmux' \
-                         'spacemacs'    'spacemacs' \
-                         'fzf'          'fzf' \
-                         'ros'          'ros' \
                          'gtag'         'gtag tool' \
                          'autojump'     'autojump tool' \
                          'qt'           'qt5' \
@@ -119,8 +118,8 @@ function self {
                          --ok-button "Install" \
                          --cancel-button "Go Back" \
                          $LINES $COLUMNS $(( $LINES - 12 )) \
-                         aptget_packages "Install self apt-get software" \
                          thirdparty_packages "Install self third-party software" \
+                         aptget_packages "Install self apt-get software" \
                          3>&1 1>&2 2>&3)
   else
     main

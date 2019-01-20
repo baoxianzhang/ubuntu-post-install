@@ -34,7 +34,7 @@ function install_atom {
   echo_message info 'Installing '$NAME'...'
   sudo add-apt-repository ppa:webupd8team/atom
   sudo apt-get update
-  sudo apt-get install atom
+  sudo apt-get install atom -y
   echo_message success "Installation of atom complete."
 }
 

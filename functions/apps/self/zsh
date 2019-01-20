@@ -2,7 +2,7 @@
 
 # Download function for ease of reuse
 function install_zsh {
-	echo_message info 'Installing '$NAME'...'
+  echo_message info 'Installing '$NAME'...'
   elevate_privilege "apt-get install -y zsh"
   wget -nc https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
   elvate_privilege "chsh -s /bin/zsh"

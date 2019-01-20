@@ -2,21 +2,10 @@
 
 # Download function for ease of reuse
 function install_git {
-  echo_message info 'Downloading '$NAME'...'
-  curl -O https://codeload.github.com/git/git/zip/master
-  # Install package(s)
-  echo_message info 'Installing '$NAME'...'
-  elevate_privilege "apt-get install -fy zlib1g-dev"
-  unzip master
-  cd git-master
-  make prefix=/usr/local all
-  elevate_privilege "make prefix=/usr/local install"
-  # elevate_privilege "make install"
-
-  # Cleanup and finish
-  cd .. # back to the top directory
-  rm -rf master
-  rm -rf git-master
+  echo_message info 'Add lastest '$NAME' ppa ...'
+  elevate_privilege "add-apt-repository ppa:git-core/ppa"
+  elevate_privilege "apt update"
+  elevate_privilege "apt install git"
 
   echo_message info 'Configure '$NAME'...'
   git config --global user.email "baoxianzhit@gmail.com"
@@ -29,8 +18,7 @@ function install_git {
   echo_message success "Installation of '$PACKAGE' complete."
 }
 
-# install git using the tar.gz
-function git {
+function latest_git {
   # Variables
   NAME="git"
   PACKAGE=git
@@ -42,6 +30,7 @@ function git {
   
   exitstatus=1  # default is not install
   # If package is not installed
+  echo_message info "before exitstatus"
   if [ $exitstatus = 1 ]; then
     echo_message info $NAME 'is not installed.'
     echo 'Proceeding'

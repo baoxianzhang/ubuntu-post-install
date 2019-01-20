@@ -2,10 +2,12 @@
 
 # Download function for ease of reuse
 function install_spacemacs {
+  THIS_DIR=$(pwd)
   echo_message info 'Downloading '$NAME'...'
-  wget -nc http://mirrors.ustc.edu.cn/gnu/emacs/emacs-25.3.tar.gz
-  tar -xzvf emacs-25.3.tar.gz
-  cd emacs-25.3
+  EMACS_VERSION=emacs-26.1
+  wget -nc http://mirrors.ustc.edu.cn/gnu/emacs/${EMACS_VERSION}.tar.gz
+  tar -xzvf ${EMACS_VERSION}.tar.gz
+  cd ${EMACS_VERSION}
   elevate_privilege "apt-get install -y libgtk2.0-dev"
   elevate_privilege "apt-get install -y libxpm-dev"
   elevate_privilege "apt-get install -y libncurses5-dev"
@@ -18,10 +20,10 @@ function install_spacemacs {
 
   # clean
   cd ..
-  rm emacs-25.3 -rf
-  rm emacs-25.3.tar.gz
+  rm ${EMACS_VERSION} -rf
+  rm ${EMACS_VERSION}.tar.gz
 
-  mkdir ~/bxgithub
+  mkdir -p ~/bxgithub
   cd ~/bxgithub
   git clone https://github.com/syl20bnr/spacemacs.git
   cd spacemacs
@@ -40,6 +42,7 @@ function install_spacemacs {
   elevate_privilege  "unzip source-code-pro -d $FONT_PATH"
   cd $FONT_PATH
   elevate_privilege "fc-cache -f -v"
+  cd ${THIS_DIR}
 
   # Install package(s)
   echo_message info 'Installing '$NAME'...'

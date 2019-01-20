@@ -26,6 +26,14 @@ function install_myfile {
   rm -rf $HOME/.vimrc.bundles.local
   ln -s $HOME/bxgithub/myfile/vimrc.bundles.local $HOME/.vimrc.bundles.local
 
+  # git templates and projectinit
+  rm -rf ~/.git-templates
+  rm -rf ~/.git-clone-init
+  rm -rf ~/.gitconfig
+  ln -s ~/bxgithub/myfile/git-templates ~/.git-templates
+  ln -s ~/bxgithub/myfile/git-templates/.git-clone-init ~/.git-clone-init
+  ln -s ~/bxgithub/myfile/git-templates/.gitconfig ~/.gitconfig
+
   # Install package(s)
   echo_message info 'Installing '$NAME'...'
   echo_message success "Installation of '$PACKAGE' complete."
@@ -40,7 +48,7 @@ function myfile {
   echo_message header 'Begin '$NAME' installation'
   # Check if package is installed
   exitstatus=1
-  if [ ! -d $HOME/bxgithub/myfile ]; then
+  if [ -d $HOME/bxgithub/myfile ]; then
     exitstatus=0
   fi
   # If package is not installed

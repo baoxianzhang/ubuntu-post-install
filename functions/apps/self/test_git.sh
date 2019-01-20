@@ -31,21 +31,9 @@ function echo_message(){
 }
 # Download function for ease of reuse
 function install_git {
-  echo_message info 'Downloading '$NAME'...'
-  curl -O https://codeload.github.com/git/git/zip/master
-  # Install package(s)
-  echo_message info 'Installing '$NAME'...'
-  elevate_privilege "apt-get install -fy zlib1g-dev"
-  unzip master
-  cd git-master
-  make prefix=/usr/local all
-  elevate_privilege "make prefix=/usr/local install"
-  # elevate_privilege "make install"
-
-  # Cleanup and finish
-  cd .. # back to the top directory
-  rm -rf master
-  rm -rf git-master
+  sudo add-apt-repository ppa:git-core/ppa 
+  sudo apt update
+  sudo apt install git
 
   echo_message info 'Configure '$NAME'...'
   git config --global user.email "baoxianzhit@gmail.com"
