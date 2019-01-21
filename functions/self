@@ -20,7 +20,9 @@ source $dir/functions/apps/self/gtag
 source $dir/functions/apps/self/sogou
 source $dir/functions/apps/self/cmake
 source $dir/functions/apps/self/chrome
-source $dir/functions/apps/self/autojump
+source $dir/functions/apps/self/moeditor
+source $dir/functions/apps/self/wps
+#source $dir/functions/apps/self/autojump
 
 # source $dir/functions/apps/self/qt
 # source $dir/functions/apps/self/wps
@@ -56,8 +58,8 @@ function thirdparty_packages {
                          'sogou'        'sogou input method' \
                          'cmake'        'cmake build tool' \
                          'gtag'         'gtag tool' \
-                         'autojump'     'autojump tool' \
-                         'qt'           'qt5' \
+                         'moeditor'     'moeditor, awsome markdown tool' \
+                         'wps'          'wps, awsome office' \
                          3>&1 1>&2 2>&3)
   else
     self

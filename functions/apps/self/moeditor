@@ -1,34 +1,35 @@
 #!/bin/bash
 
-# Download function for ease of reuse
-function install_zsh {
+function install_moeditor {
+  echo_message info 'Downloading '$NAME'...'
+  wget -O moeditor_amd64.deb https://github.com/Moeditor/Moeditor/releases/download/v0.2.0-beta/moeditor_0.2.0-1_amd64.deb
+  # Install package(s)
   echo_message info 'Installing '$NAME'...'
-  elevate_privilege "apt-get install -y zsh"
-  wget -nc https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
-  elvate_privilege "chsh -s /bin/zsh"
-  echo_message info "Logout to use zsh"
+  elevate_privilege "dpkg -i moeditor_amd64.deb"
+
+  # Cleanup and finish
+  rm -rf moeditor_amd64.deb
   echo_message success "Installation of '$PACKAGE' complete."
 }
 
-# install git using the tar.gz
-function zsh {
+function moeditor {
   # Variables
-  NAME="zsh"
-  PACKAGE=zsh
+  NAME="moeditor"
+  PACKAGE=moeditor
   # Install
   echo_message header 'Begin '$NAME' installation'
   # Check if package is installed
-  # check_packages $PACKAGE
-  exitstatus=1
+  check_packages $PACKAGE
+  exitstatus=$?
   # If package is not installed
   if [ $exitstatus = 1 ]; then
     echo_message info $NAME 'is not installed.'
     echo 'Proceeding'
-    install_zsh
+    install_moeditor
     whiptail --title "Finished" --msgbox "Installation $NAME complete." 8 64
   else
     # Already installed
-    echo_message $NAME 'already installed.'
+    echo_message info $NAME 'already installed.'
     whiptail --title "Finished" --msgbox "$NAME is already installed." 8 64
   fi
   thirdparty_packages

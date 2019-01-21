@@ -98,7 +98,6 @@ function main {
 		configure	'Configure system' \
 		cleanup		'Cleanup the system' \
 		3>&1 1>&2 2>&3)
-
 	# check exit status
 	EXITSTATUS=$?
 	if [ $EXITSTATUS = 0 ]; then

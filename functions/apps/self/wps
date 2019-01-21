@@ -7,7 +7,7 @@ function install_wps {
 
   # Install package(s)
   echo_message info 'Installing '$NAME'...'
-  elevate_privilege "dpkg -i wps-office_amd64.deb"
+  elevate_privilege "gdebi wps-office_amd64.deb"
 
   # Cleanup and finish
   rm -rf wps-office_amd64.deb
