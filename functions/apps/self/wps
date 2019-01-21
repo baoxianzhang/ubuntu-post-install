@@ -3,7 +3,8 @@
 function install_wps {
   echo_message info 'Downloading '$NAME'...'
 
-  wget -c http://kdl.cc.ksosoft.com/wps-community/download/a21/wps-office_10.1.0.5672~a21_amd64.deb -O wps-office_amd64.deb
+  # wget -nc http://kdl.cc.ksosoft.com/wps-community/download/a21/wps-office_10.1.0.5672~a21_amd64.deb -O wps-office_amd64.deb
+  wget -nc http://kdl.cc.ksosoft.com/wps-community/download/6757/wps-office_10.1.0.6757_amd64.deb -O wps-office_amd64.deb
 
   # Install package(s)
   echo_message info 'Installing '$NAME'...'

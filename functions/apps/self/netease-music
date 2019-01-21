@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Download function for ease of reuse
+function install_netease {
+  elevate_privilege "snap install netease-music --devmode --beta"
+  echo_message success "Installation of '$PACKAGE' complete."
+}
+
+function netease {
+  # Variables
+  NAME="netease"
+  PACKAGE=netease
+  # Install
+  echo_message header 'Begin '$NAME' installation'
+  # Check if package is installed
+  # check_packages $PACKAGE
+  # exitstatus=$?
+
+  exitstatus=1  # default is not install
+  # If package is not installed
+  if [ $exitstatus = 1 ]; then
+    echo_message info $NAME 'is not installed.'
+    echo 'Proceeding'
+    install_netease
+    whiptail --title "Finished" --msgbox "Installation $NAME complete." 8 64
+  else
+    # Already installed
+    echo_message $NAME 'already installed.'
+    whiptail --title "Finished" --msgbox "$NAME is already installed." 8 64
+  fi
+  thirdparty_packages
+}
