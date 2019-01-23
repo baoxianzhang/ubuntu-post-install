@@ -5,7 +5,7 @@ function install_zsh {
   echo_message info 'Installing '$NAME'...'
   elevate_privilege "apt-get install -y zsh"
   wget -nc https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
-  elvate_privilege "chsh -s /bin/zsh"
+  elevate_privilege "chsh -s /bin/zsh"
   echo_message info "Logout to use zsh"
   echo_message success "Installation of '$PACKAGE' complete."
 }
