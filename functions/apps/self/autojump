@@ -3,15 +3,11 @@
 # Download function for ease of reuse
 function install_autojump {
   echo_message info 'Installing '$NAME'...'
-  wget -nc https://github.com/downloads/joelthelion/autojump/autojump_v21.1.2.tar.gz
-  tar -xzvf autojump_v21.1.2.tar.gz
-  cd autojump_v21.1.2
-  ./install.sh
-
+  git clone https://github.com/wting/autojump.git
+  cd autojump && ./install.py
   # clean
   cd ..
-  rm -rf autojump_v21.1.2
-  rm -rf autojump_v21.1.2.tar.gz
+  rm autojump -rf
   echo_message success "Installation of '$PACKAGE' complete."
 }
 

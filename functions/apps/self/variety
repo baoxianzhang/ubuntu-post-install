@@ -1,27 +1,18 @@
 #!/bin/bash
 
 # Download function for ease of reuse
-function install_git {
+function install_variety() {
   echo_message info 'Add lastest '$NAME' ppa ...'
-  elevate_privilege "add-apt-repository ppa:git-core/ppa"
-  elevate_privilege "apt update"
-  elevate_privilege "apt install git -y"
-
-  echo_message info 'Configure '$NAME'...'
-  git config --global user.email "baoxianzhit@gmail.com"
-  git config --global user.name "baoxianzhang"
-  git config --global core.editor vim
-  git config --global push.default simple
-  git config --global alias.unstage "reset HEAD --"
-  git config --global alias.last "log -1 HEAD"
-
+  elevate_privilege "add-apt-repository ppa:peterlevi/ppa"
+  elevate_privilege "apt-get update"
+  elevate_privilege "apt-get install -y variety"
   echo_message success "Installation of '$PACKAGE' complete."
 }
 
-function latest_git {
+function variety() {
   # Variables
-  NAME="git"
-  PACKAGE=git
+  NAME="variety"
+  PACKAGE=variety
   # Install
   echo_message header 'Begin '$NAME' installation'
   # Check if package is installed
@@ -33,7 +24,7 @@ function latest_git {
   if [ $exitstatus = 1 ]; then
     echo_message info $NAME 'is not installed.'
     echo 'Proceeding'
-    install_git
+    install_variety
     whiptail --title "Finished" --msgbox "Installation $NAME complete." 8 64
   else
     # Already installed

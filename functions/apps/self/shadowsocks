@@ -1,27 +1,27 @@
 #!/bin/bash
 
 # Download function for ease of reuse
-function install_git {
-  echo_message info 'Add lastest '$NAME' ppa ...'
-  elevate_privilege "add-apt-repository ppa:git-core/ppa"
-  elevate_privilege "apt update"
-  elevate_privilege "apt install git -y"
+function install_shadowsocks {
+  elevate_privilege "apt-get install -y python-pip"
+  elevate_privilege "pip install --upgrade git+https://github.com/shadowsocks/shadowsocks.git@master"
+  wget -nc https://download.libsodium.org/libsodium/releases/LATEST.tar.gz
+  tar xvf LATEST.tar.gz && cd libsodium-stable && ./configure --prefix=/usr && make && sudo make install
+  # elevate_privilege "apt-get install -y polipo"
+  # sudo cp ${CONFIGDIR}/polipo.conf /etc/polipo/config
+  # elevate_privilege "service polipo stop"
+  # elevate_privilege "service polipo start"
 
-  echo_message info 'Configure '$NAME'...'
-  git config --global user.email "baoxianzhit@gmail.com"
-  git config --global user.name "baoxianzhang"
-  git config --global core.editor vim
-  git config --global push.default simple
-  git config --global alias.unstage "reset HEAD --"
-  git config --global alias.last "log -1 HEAD"
+  cd ../
+  rm LATEST.tar.gz
+  rm libsodium-stable -rf
 
   echo_message success "Installation of '$PACKAGE' complete."
 }
 
-function latest_git {
+function shadowsocks {
   # Variables
-  NAME="git"
-  PACKAGE=git
+  NAME="shadowsock"
+  PACKAGE=shadowsock
   # Install
   echo_message header 'Begin '$NAME' installation'
   # Check if package is installed
@@ -33,7 +33,7 @@ function latest_git {
   if [ $exitstatus = 1 ]; then
     echo_message info $NAME 'is not installed.'
     echo 'Proceeding'
-    install_git
+    install_shadowsocks
     whiptail --title "Finished" --msgbox "Installation $NAME complete." 8 64
   else
     # Already installed

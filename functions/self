@@ -9,7 +9,6 @@ dir=$(dirname "$0")
 source $dir/functions/apps/self/git
 source $dir/functions/apps/self/zsh
 source $dir/functions/apps/self/vim
-source $dir/functions/apps/self/tmux
 source $dir/functions/apps/self/myfile
 source $dir/functions/apps/self/spacemacs
 
@@ -22,7 +21,28 @@ source $dir/functions/apps/self/cmake
 source $dir/functions/apps/self/chrome
 source $dir/functions/apps/self/moeditor
 source $dir/functions/apps/self/wps
-#source $dir/functions/apps/self/autojump
+source $dir/functions/apps/self/shadowsocks
+source $dir/functions/apps/self/variety
+source $dir/functions/apps/self/autojump
+
+function install_all() {
+  latest_git
+  zsh
+  vim
+  spacemacs
+  fzf
+  ros
+  myfile
+  chrome
+  sogou
+  cmake
+  gtag
+  moeditor
+  shadowsocks
+  wps
+  variety
+  autojump
+}
 
 # source $dir/functions/apps/self/qt
 # source $dir/functions/apps/self/wps
@@ -47,7 +67,8 @@ function thirdparty_packages {
                          --ok-button "Install" \
                          --cancel-button "Go Back" \
                          $LINES $COLUMNS $(( $LINES - 12 )) \
-                         'latest_git'          'Latest Git' \
+                         'install_all'  'all below software' \
+                         'latest_git'   'Latest Git' \
                          'zsh'          'oh-my-zsh' \
                          'vim'          'spf13-vim' \
                          'spacemacs'    'spacemacs' \
@@ -58,8 +79,11 @@ function thirdparty_packages {
                          'sogou'        'sogou input method' \
                          'cmake'        'cmake build tool' \
                          'gtag'         'gtag tool' \
+                         'autojump'     'auto jump tool' \
                          'moeditor'     'moeditor, awsome markdown tool' \
+                         'shadowsocks'  'shadowsock network' \
                          'wps'          'wps, awsome office' \
+                         'variety'      'variety, beautiful wallpaper' \
                          3>&1 1>&2 2>&3)
   else
     self
