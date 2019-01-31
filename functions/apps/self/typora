@@ -1,0 +1,38 @@
+#!/bin/bash
+
+function install_typora() {
+  echo_message info 'Installing '$NAME'...'
+  # or run:
+  # sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA300B7755AFCFAE
+  wget -qO - https://typora.io/linux/public-key.asc | elevate_privilege "apt-key add -"
+  # add Typora's repository
+  elevate_privilege "add-apt-repository 'deb https://typora.io/linux ./' "
+  elevate_privilege "apt-get update"
+  # install typora
+  elevate_privilege "apt-get install typora"
+
+  echo_message success "Installation of '$PACKAGE' complete."
+}
+
+function typora() {
+  # Variables
+  NAME="typora"
+  PACKAGE=typora
+  # Install
+  echo_message header 'Begin '$NAME' installation'
+  # Check if package is installed
+  check_packages $PACKAGE
+  exitstatus=$?
+  # If package is not installed
+  if [ $exitstatus = 1 ]; then
+    echo_message info $NAME 'is not installed.'
+    echo 'Proceeding'
+    install_typora
+    whiptail --title "Finished" --msgbox "Installation $NAME complete." 8 64
+  else
+    # Already installed
+    echo_message info $NAME 'already installed.'
+    whiptail --title "Finished" --msgbox "$NAME is already installed." 8 64
+  fi
+  thirdparty_packages
+}
