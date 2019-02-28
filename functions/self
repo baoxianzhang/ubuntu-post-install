@@ -20,10 +20,12 @@ source $dir/functions/apps/self/sogou
 source $dir/functions/apps/self/cmake
 source $dir/functions/apps/self/chrome
 source $dir/functions/apps/self/moeditor
+source $dir/functions/apps/self/typora
 source $dir/functions/apps/self/wps
 source $dir/functions/apps/self/shadowsocks
 source $dir/functions/apps/self/variety
 source $dir/functions/apps/self/autojump
+source $dir/functions/apps/self/gitbook
 
 function install_all() {
   latest_git
@@ -38,10 +40,12 @@ function install_all() {
   cmake
   gtag
   moeditor
+  typora
   shadowsocks
   wps
   variety
   autojump
+  gitbook
 }
 
 # source $dir/functions/apps/self/qt
@@ -81,9 +85,11 @@ function thirdparty_packages {
                          'gtag'         'gtag tool' \
                          'autojump'     'auto jump tool' \
                          'moeditor'     'moeditor, awsome markdown tool' \
+                         'typora'       'typora, another awsome markdown tool' \
                          'shadowsocks'  'shadowsock network' \
                          'wps'          'wps, awsome office' \
                          'variety'      'variety, beautiful wallpaper' \
+                         'gitbook'      'gitbook, easy markdown book' \
                          3>&1 1>&2 2>&3)
   else
     self

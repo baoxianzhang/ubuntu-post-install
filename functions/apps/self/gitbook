@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# Download function for ease of reuse
+function install_gitbook() {
+  echo_message info 'install nodejs...'
+  elevate_privilege "apt-get install nodejs"
+  elevate_privilege "npm install gitbook-cli -g"
+
+  # gitbook init
+  # gitbook serve
+  # gitbook build
+
+  echo_message success "Installation of '$PACKAGE' complete."
+}
+
+function gitbook() {
+  # Variables
+  NAME="gitbook"
+  PACKAGE=gitbook
+  # Install
+  echo_message header 'Begin '$NAME' installation'
+  # Check if package is installed
+  # check_packages $PACKAGE
+  # exitstatus=$?
+
+  exitstatus=1  # default is not install
+  # If package is not installed
+  if [ $exitstatus = 1 ]; then
+    echo_message info $NAME 'is not installed.'
+    echo 'Proceeding'
+    install_gitbook
+    whiptail --title "Finished" --msgbox "Installation $NAME complete." 8 64
+  else
+    # Already installed
+    echo_message $NAME 'already installed.'
+    whiptail --title "Finished" --msgbox "$NAME is already installed." 8 64
+  fi
+  thirdparty_packages
+}
