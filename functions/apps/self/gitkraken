@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Download function for ease of reuse
+function install_gitkraken {
+  wget https://release.axocdn.com/linux/gitkraken-amd64.deb
+  elevate_privilege dpkg -i gitkraken-amd-64.deb
+  rm gitkraken-amd64.deb
+  echo_message success "Installation of '$PACKAGE' complete."
+}
+
+function gitkraken {
+  # Variables
+  NAME="gitkraken"
+  PACKAGE=gitkraken
+  # Install
+  echo_message header 'Begin '$NAME' installation'
+  # Check if package is installed
+  # check_packages $PACKAGE
+  # exitstatus=$?
+  
+  exitstatus=1  # default is not install
+  # If package is not installed
+  if [ $exitstatus = 1 ]; then
+    echo_message info $NAME 'is not installed.'
+    echo 'Proceeding'
+    install_gitkraken
+    whiptail --title "Finished" --msgbox "Installation $NAME complete." 8 64
+  else
+    # Already installed
+    echo_message $NAME 'already installed.'
+    whiptail --title "Finished" --msgbox "$NAME is already installed." 8 64
+  fi
+  thirdparty_packages
+}
