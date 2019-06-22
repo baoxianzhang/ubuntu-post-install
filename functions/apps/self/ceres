@@ -1,0 +1,50 @@
+#!/bin/bash
+
+function install_ceres {
+  elevate_privilege "apt-get install cmake -y "
+  elevate_privilege "apt-get install libgoogle-glog-dev"
+  elevate_privilege "apt-get install libatlas-base-dev"
+  elevate_privilege "apt-get install libeigen3-dev"
+  elevate_privilege "apt-get install libsuitesparse-dev"
+
+  echo_message info 'Downloading ceres_solver ...'
+  wget -c https://codeload.github.com/ceres-solver/ceres-solver/zip/master
+  unzip master
+  rm master
+  cd ceres-solver-master
+  mkdir -p build
+  cd build
+  echo_message info 'cmake ...'
+  # no work, why ?
+  cmake .. && make
+  elevate_privilege "make install"
+  cd ../..
+  rm ceres-solver-master -rf
+  # Cleanup and finish
+  echo_message success "Installation of ceres_solver complete."
+}
+
+function ceres {
+  # Variables
+  NAME="ceres"
+  PACKAGE=ceres
+  # Install
+  echo_message header 'Begin '$NAME' installation'
+  # Check if package is installed
+  # check_packages $PACKAGE
+  # exitstatus=$?
+  
+  exitstatus=1  # default is not install
+  # If package is not installed
+  if [ $exitstatus = 1 ]; then
+    echo_message info $NAME 'is not installed.'
+    echo 'Proceeding'
+    install_ceres
+    whiptail --title "Finished" --msgbox "Installation $NAME complete." 8 64
+  else
+    # Already installed
+    echo_message $NAME 'already installed.'
+    whiptail --title "Finished" --msgbox "$NAME is already installed." 8 64
+  fi
+  thirdparty_packages
+}
