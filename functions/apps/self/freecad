@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Download function for ease of reuse
+function install_freecad {
+  echo_message info 'Add lastest '$NAME' ppa ...'
+  elevate_privilege "add-apt-repository ppa:freecad-maintainers/freecad-stable"
+  elevate_privilege "apt update"
+  elevate_privilege "apt install freecad -y"
+  elevate_privilege "apt install gmsh"
+  elevate_privilege "apt install calculix-ccx"
+
+  echo_message success "Installation of '$PACKAGE' complete."
+}
+
+function freecad {
+  # Variables
+  NAME="freecad"
+  PACKAGE=freecad
+  # Install
+  echo_message header 'Begin '$NAME' installation'
+  # Check if package is installed
+  # check_packages $PACKAGE
+  # exitstatus=$?
+  
+  exitstatus=1  # default is not install
+  # If package is not installed
+  if [ $exitstatus = 1 ]; then
+    echo_message info $NAME 'is not installed.'
+    echo 'Proceeding'
+    install_freecad
+    whiptail --title "Finished" --msgbox "Installation $NAME complete." 8 64
+  else
+    # Already installed
+    echo_message $NAME 'already installed.'
+    whiptail --title "Finished" --msgbox "$NAME is already installed." 8 64
+  fi
+  thirdparty_packages
+}
