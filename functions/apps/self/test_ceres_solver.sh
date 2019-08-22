@@ -45,7 +45,7 @@ function install_ceres_solver {
   mkdir build && cd build
   cmake ..
   make
-  sudod make install
+  sudo make install
   cd ../..
   rm ceres-solver-master -rf
   # Cleanup and finish

@@ -27,6 +27,7 @@ source $dir/functions/apps/self/variety
 source $dir/functions/apps/self/autojump
 source $dir/functions/apps/self/gitbook
 source $dir/functions/apps/self/freecad
+source $dir/functions/apps/self/gitkraken
 
 function install_all() {
   latest_git
@@ -93,8 +94,8 @@ function thirdparty_packages {
                          'wps'          'wps, awsome office' \
                          'variety'      'variety, beautiful wallpaper' \
                          'gitbook'      'gitbook, easy markdown book' \
-                         'gitkraken'    'good git gui tool in linux' \
                          'freecad'      'open source CAD' \
+                         'gitkraken'    'gitkraken, good git gui tool in linux' \
                          3>&1 1>&2 2>&3)
   else
     self
