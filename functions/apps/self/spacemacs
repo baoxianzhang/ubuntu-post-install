@@ -14,6 +14,7 @@ function install_spacemacs {
   elevate_privilege "apt-get install -y libjpeg-dev"
   elevate_privilege "apt-get install -y libgif-dev"
   elevate_privilege "apt-get install -y libtiff5-dev"
+  elevate_privilege "apt-get install -y gnutls-dev"
   ./configure
   make
   elevate_privilege "make install"
@@ -21,7 +22,7 @@ function install_spacemacs {
   # clean
   cd ..
   rm ${EMACS_VERSION} -rf
-  rm ${EMACS_VERSION}.tar.gz
+  # rm ${EMACS_VERSION}.tar.gz
 
   mkdir -p ~/bxgithub
   cd ~/bxgithub
@@ -30,6 +31,7 @@ function install_spacemacs {
   git checkout develop
   rm -rf ~/.emacs.d
   ln -s ~/bxgithub/spacemacs ~/.emacs.d
+  ln -s ~/bxgithub/myfile/spacemacs.d ~/.spacemacs.d
 
   # install tern
   elevate_privilege "apt-get install -y npm"

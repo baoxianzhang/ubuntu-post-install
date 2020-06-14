@@ -1,4 +1,3 @@
-python
 build-essential
 curl
 xsel
@@ -20,3 +19,5 @@ kolourpaint4
 clang-format
 flameshot
 librecad
+octave
+gnuplot

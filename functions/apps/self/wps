@@ -4,14 +4,15 @@ function install_wps {
   echo_message info 'Downloading '$NAME'...'
 
   # wget -nc http://kdl.cc.ksosoft.com/wps-community/download/a21/wps-office_10.1.0.5672~a21_amd64.deb -O wps-office_amd64.deb
-  wget -nc http://kdl.cc.ksosoft.com/wps-community/download/6757/wps-office_10.1.0.6757_amd64.deb -O wps-office_amd64.deb
+  # wget -nc http://kdl.cc.ksosoft.com/wps-community/download/6757/wps-office_10.1.0.6757_amd64.deb -O wps-office_amd64.deb
+  wget -nc https://wdl1.cache.wps.cn/wps/download/ep/Linux2019/9522/wps-office_11.1.0.9522_amd64.deb -O wps-office_amd64.deb
 
   # Install package(s)
   echo_message info 'Installing '$NAME'...'
   elevate_privilege "gdebi wps-office_amd64.deb"
 
   # Cleanup and finish
-  rm -rf wps-office_amd64.deb
+  # rm -rf wps-office_amd64.deb
   echo_message success "Installation of '$PACKAGE' complete."
 }
 

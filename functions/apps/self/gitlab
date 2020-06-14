@@ -1,0 +1,64 @@
+#!/bin/bash
+
+# Download gitlab in ubuntu18.04
+function install_gitlab() {
+  elevate_privilege "apt update"
+  elevate_privilege "apt-get install -y curl openssh-server ca-certificates"
+  elevate_privilege "apt-get install -y postfix"
+  curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ee/script.deb.sh | elevate_privilege "bash"
+  elevate_privilege "EXTERNAL_URL="https://gitlab.example.com" apt-get install gitlab-ee"
+  
+   # virtualbox network set "Bridged Adapter"
+   # https://blog.csdn.net/qq_36937342/article/details/80876385
+   # find netcard name, ifconfig
+   # sudo vi /etc/network/interfaces; below 192.168.43.xxx, 43 is the phone share network
+   
+   # auto lo
+   # iface lo inet loopback
+   # auto ens33
+   # iface ens33 inet static
+   # address 192.168.43.100
+   # netmask 255.255.255.0
+   # gateway 192.168.43.1
+   
+   # sudo /etc/init.d/neworking restart
+   # sudo vi /etc/systemd/resolved.conf; to DNS 
+   # add DNS=8.8.8.8 223.5.5.5
+   
+   # fix the ip 
+   # vim /etc/gitlab/gitlab.rb
+   # external_url "http://192.168.43.100"
+   
+   # sudo gitlab-ctl reconfigure
+   # sudo gitlab-ctl start
+   
+  
+  
+
+  echo_message success "Installation of '$PACKAGE' complete."
+}
+
+function gitlab() {
+  # Variables
+  NAME="gitlab"
+  PACKAGE=gitlab
+  # Install
+  echo_message header 'Begin '$NAME' installation'
+  # Check if package is installed
+  # check_packages $PACKAGE
+  # exitstatus=$?
+  
+  exitstatus=1  # default is not install
+  # If package is not installed
+  if [ $exitstatus = 1 ]; then
+    echo_message info $NAME 'is not installed.'
+    echo 'Proceeding'
+    install_gitlab
+    whiptail --title "Finished" --msgbox "Installation $NAME complete." 8 64
+  else
+    # Already installed
+    echo_message $NAME 'already installed.'
+    whiptail --title "Finished" --msgbox "$NAME is already installed." 8 64
+  fi
+  thirdparty_packages
+}

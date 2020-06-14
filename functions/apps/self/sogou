@@ -11,7 +11,7 @@ function install_sogou {
   # elevate_privilege "dpkg -i sogoupinyin_amd64.deb"
   elevate_privilege "gdebi sogoupinyin_amd64.deb"
   # Cleanup and finish
-  rm -rf sogoupinyin_amd64.deb
+  # rm -rf sogoupinyin_amd64.deb
   echo_message success "Installation of '$PACKAGE' complete."
 }
 

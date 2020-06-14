@@ -1,12 +1,8 @@
 #!/bin/bash
 
-<<<<<<< HEAD
 # Download function for ease of reuse
 function install_typora() {
-=======
-function install_typora() {
   echo_message info 'Installing '$NAME'...'
->>>>>>> 408a1b4f0c7c22220d7db8616e03d29b55aa30c4
   # or run:
   # sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA300B7755AFCFAE
   wget -qO - https://typora.io/linux/public-key.asc | elevate_privilege "apt-key add -"

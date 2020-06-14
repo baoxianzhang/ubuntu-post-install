@@ -1,35 +1,32 @@
 #!/bin/bash
 
-function install_moeditor {
-  echo_message info 'Downloading '$NAME'...'
-  wget -O moeditor_amd64.deb https://github.com/Moeditor/Moeditor/releases/download/v0.2.0-beta/moeditor_0.2.0-1_amd64.deb
-  # Install package(s)
+# Download function for ease of reuse
+function install_latex() {
   echo_message info 'Installing '$NAME'...'
-  elevate_privilege "dpkg -i moeditor_amd64.deb"
-
-  # Cleanup and finish
-  # rm -rf moeditor_amd64.deb
+  elevate_privilege "apt-get install texlive-full"
+  elevate_privilege "apt-get install texmaker"
+  elevate_privilege "apt-get install latex-cjk-all"
   echo_message success "Installation of '$PACKAGE' complete."
 }
 
-function moeditor {
+function latex {
   # Variables
-  NAME="moeditor"
-  PACKAGE=moeditor
+  NAME="latex"
+  PACKAGE=latex 
   # Install
   echo_message header 'Begin '$NAME' installation'
   # Check if package is installed
-  check_packages $PACKAGE
-  exitstatus=$?
+  exitstatus=1 #not exit
+
   # If package is not installed
-  if [ $exitstatus = 1 ]; then
+  if [ $exitstatus = 1 ] ; then
     echo_message info $NAME 'is not installed.'
     echo 'Proceeding'
-    install_moeditor
+    install_latex
     whiptail --title "Finished" --msgbox "Installation $NAME complete." 8 64
   else
     # Already installed
-    echo_message info $NAME 'already installed.'
+    echo_message $NAME 'already installed.'
     whiptail --title "Finished" --msgbox "$NAME is already installed." 8 64
   fi
   thirdparty_packages

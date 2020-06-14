@@ -28,6 +28,7 @@ source $dir/functions/apps/self/autojump
 source $dir/functions/apps/self/gitbook
 source $dir/functions/apps/self/freecad
 source $dir/functions/apps/self/gitkraken
+source $dir/functions/apps/self/latex
 
 function install_all() {
   latest_git
@@ -50,6 +51,7 @@ function install_all() {
   gitbook
   gitkraken
   freecad
+  latex
 }
 
 # source $dir/functions/apps/self/qt
@@ -96,6 +98,7 @@ function thirdparty_packages {
                          'gitbook'      'gitbook, easy markdown book' \
                          'freecad'      'open source CAD' \
                          'gitkraken'    'gitkraken, good git gui tool in linux' \
+                         'latex'        'latex' \
                          3>&1 1>&2 2>&3)
   else
     self
