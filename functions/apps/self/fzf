@@ -1,14 +1,14 @@
 #!/bin/bash
 
 # Download function for ease of reuse
-function install_fzf {
+function install_fzf() {
   echo_message info 'Installing '$NAME'...'
   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
   ~/.fzf/install
   echo_message success "Installation of '$PACKAGE' complete."
 }
 
-function fzf {
+function fzf() {
   # Variables
   NAME="fzf"
   PACKAGE=fzf

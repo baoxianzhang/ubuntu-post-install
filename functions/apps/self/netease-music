@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # Download function for ease of reuse
-function install_netease {
+function install_netease() {
   elevate_privilege "snap install netease-music --devmode --beta"
   echo_message success "Installation of '$PACKAGE' complete."
 }
 
-function netease {
+function netease() {
   # Variables
   NAME="netease"
   PACKAGE=netease

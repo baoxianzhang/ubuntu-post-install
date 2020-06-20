@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function install_moeditor {
+function install_moeditor() {
   echo_message info 'Downloading '$NAME'...'
   wget -O moeditor_amd64.deb https://github.com/Moeditor/Moeditor/releases/download/v0.2.0-beta/moeditor_0.2.0-1_amd64.deb
   # Install package(s)
@@ -12,7 +12,7 @@ function install_moeditor {
   echo_message success "Installation of '$PACKAGE' complete."
 }
 
-function moeditor {
+function moeditor() {
   # Variables
   NAME="moeditor"
   PACKAGE=moeditor

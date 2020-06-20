@@ -7,12 +7,12 @@ function install_gitlab() {
   elevate_privilege "apt-get install -y postfix"
   curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ee/script.deb.sh | elevate_privilege "bash"
   elevate_privilege "EXTERNAL_URL="https://gitlab.example.com" apt-get install gitlab-ee"
-  
+
    # virtualbox network set "Bridged Adapter"
    # https://blog.csdn.net/qq_36937342/article/details/80876385
    # find netcard name, ifconfig
    # sudo vi /etc/network/interfaces; below 192.168.43.xxx, 43 is the phone share network
-   
+
    # auto lo
    # iface lo inet loopback
    # auto ens33
@@ -20,20 +20,17 @@ function install_gitlab() {
    # address 192.168.43.100
    # netmask 255.255.255.0
    # gateway 192.168.43.1
-   
+
    # sudo /etc/init.d/neworking restart
-   # sudo vi /etc/systemd/resolved.conf; to DNS 
+   # sudo vi /etc/systemd/resolved.conf; to DNS
    # add DNS=8.8.8.8 223.5.5.5
-   
-   # fix the ip 
+
+   # fix the ip
    # vim /etc/gitlab/gitlab.rb
    # external_url "http://192.168.43.100"
-   
+
    # sudo gitlab-ctl reconfigure
    # sudo gitlab-ctl start
-   
-  
-  
 
   echo_message success "Installation of '$PACKAGE' complete."
 }
@@ -47,7 +44,7 @@ function gitlab() {
   # Check if package is installed
   # check_packages $PACKAGE
   # exitstatus=$?
-  
+
   exitstatus=1  # default is not install
   # If package is not installed
   if [ $exitstatus = 1 ]; then

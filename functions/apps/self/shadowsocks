@@ -1,24 +1,23 @@
 #!/bin/bash
 
 # Download function for ease of reuse
-function install_shadowsocks {
+function install_shadowsocks() {
   elevate_privilege "apt-get install -y python-pip"
   elevate_privilege "pip install --upgrade git+https://github.com/shadowsocks/shadowsocks.git@master"
-  wget -nc https://download.libsodium.org/libsodium/releases/LATEST.tar.gz
-  tar xvf LATEST.tar.gz && cd libsodium-stable && ./configure --prefix=/usr && make && sudo make install
+  wget -O libsodium.tar.gz -nc https://download.libsodium.org/libsodium/releases/LATEST.tar.gz
+  tar xvf libsodium.tar.gz && cd libsodium-stable && ./configure --prefix=/usr && make && sudo make install
   # elevate_privilege "apt-get install -y polipo"
   # sudo cp ${CONFIGDIR}/polipo.conf /etc/polipo/config
   # elevate_privilege "service polipo stop"
   # elevate_privilege "service polipo start"
 
   cd ../
-  rm LATEST.tar.gz
   rm libsodium-stable -rf
 
   echo_message success "Installation of '$PACKAGE' complete."
 }
 
-function shadowsocks {
+function shadowsocks() {
   # Variables
   NAME="shadowsock"
   PACKAGE=shadowsock

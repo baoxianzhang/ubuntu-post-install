@@ -1,14 +1,14 @@
 #!/bin/bash
 
 # Download function for ease of reuse
-function install_gitkraken {
+function install_gitkraken() {
   wget https://release.axocdn.com/linux/gitkraken-amd64.deb
   elevate_privilege dpkg -i gitkraken-amd64.deb
-  rm gitkraken-amd64.deb
+  # rm gitkraken-amd64.deb
   echo_message success "Installation of '$PACKAGE' complete."
 }
 
-function gitkraken {
+function gitkraken() {
   # Variables
   NAME="gitkraken"
   PACKAGE=gitkraken

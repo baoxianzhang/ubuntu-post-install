@@ -9,7 +9,7 @@ function install_latex() {
   echo_message success "Installation of '$PACKAGE' complete."
 }
 
-function latex {
+function latex() {
   # Variables
   NAME="latex"
   PACKAGE=latex 

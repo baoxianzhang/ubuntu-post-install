@@ -1,17 +1,17 @@
 #!/bin/bash
 
 # Download function for ease of reuse
-function install_autojump {
+function install_autojump() {
   echo_message info 'Installing '$NAME'...'
   git clone https://github.com/wting/autojump.git
   cd autojump && ./install.py
   # clean
   cd ..
-  rm autojump -rf
+  # rm autojump -rf
   echo_message success "Installation of '$PACKAGE' complete."
 }
 
-function autojump {
+function autojump() {
   # Variables
   NAME="autojump"
   PACKAGE=j

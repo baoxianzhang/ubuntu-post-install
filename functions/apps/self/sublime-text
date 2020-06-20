@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Download function for ease of reuse
-function install_sublime {
+function install_sublime() {
 	echo_message info 'Downloading '$NAME'...'
 	# Download Debian file that matches system architecture
 	case `uname -i` in
@@ -23,13 +23,13 @@ function install_sublime {
 	echo_message info 'Creating symbolic link...'
 	elevate_privilege "ln -sf /opt/sublime_text/sublime_text /usr/bin/sublime"
 	# Cleanup and finish
-	rm ${PACKAGE}*.deb
+	# rm ${PACKAGE}*.deb
 	echo_message success "Installation of '$PACKAGE' complete."
 }
 
 
 # Sublime Text 3
-function sublime-text {
+function sublime-text() {
 	# Variables
 	NAME="Sublime Text 3"
 	PACKAGE=sublime-text

@@ -2,7 +2,7 @@
 
 # Download function for ease of reuse
 
-function install_myfile {
+function install_myfile() {
   echo_message info 'Downloading '$NAME'...'
   mkdir -p $HOME/bxgithub
   cd $HOME/bxgithub
@@ -40,7 +40,7 @@ function install_myfile {
 }
 
 # install git using the tar.gz
-function myfile {
+function myfile() {
   # Variables
   NAME="myfile"
   PACKAGE=myfile

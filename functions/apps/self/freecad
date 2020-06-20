@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Download function for ease of reuse
-function install_freecad {
+function install_freecad() {
   echo_message info 'Add lastest '$NAME' ppa ...'
   elevate_privilege "add-apt-repository ppa:freecad-maintainers/freecad-stable"
   elevate_privilege "apt update"
@@ -12,7 +12,7 @@ function install_freecad {
   echo_message success "Installation of '$PACKAGE' complete."
 }
 
-function freecad {
+function freecad() {
   # Variables
   NAME="freecad"
   PACKAGE=freecad

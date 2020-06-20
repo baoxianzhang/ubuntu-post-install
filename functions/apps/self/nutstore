@@ -1,19 +1,18 @@
 #!/bin/bash
 
 # Download function for ease of reuse
-function install_nutstore {
+function install_nutstore() {
 	echo_message info 'Installing '$NAME'...'
   wget -c https://www.jianguoyun.com/static/exe/installer/ubuntu/nautilus_nutstore_amd64.deb
   elvate_privilege "dpkg -i nautilus_nutstore_amd64.deb"
   elvate_privilege "apt-get install -f"
 
   # clean
-  rm nautilus_nutstore_amd64.deb -rf
+  # rm nautilus_nutstore_amd64.deb -rf
   echo_message success "Installation of '$PACKAGE' complete."
 }
 
-# install git using the tar.gz
-function nutstore {
+function nutstore() {
   # Variables
   NAME="nutstore"
   PACKAGE=nutstore

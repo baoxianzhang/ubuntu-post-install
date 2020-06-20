@@ -1,25 +1,23 @@
 #!/bin/bash
 
 # Download function for ease of reuse
-function install_cmake {
+function install_cmake() {
   echo_message info 'Downloading '$NAME'...'
-  curl -O https://codeload.github.com/Kitware/CMake/zip/master
+  wget -O cmake.zip https://codeload.github.com/Kitware/CMake/zip/master
   # Install package(s)
   echo_message info 'Installing '$NAME'...'
-  unzip master
+  unzip cmake.zip
   cd CMake-master
   ./bootstrap --prefix=/usr/local && make
   elevate_privilege "make install"
 
   # Cleanup and finish
   cd .. # back to the top directory
-  rm -rf master
   rm -rf CMake-master
   echo_message success "Installation of '$PACKAGE' complete."
 }
 
-# install git using the tar.gz
-function cmake {
+function cmake() {
   # Variables
   NAME="cmake"
   PACKAGE=cmake

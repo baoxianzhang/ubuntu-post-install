@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Install Chrome
-function install_chrome { 
+function install_chrome() { 
 	# Variables
 	PACKAGE=google-chrome-$@
 	NAME="Google Chrome ($@)"
@@ -45,8 +45,8 @@ function install_chrome {
 }
 
 # Google Chrome
-function chrome {
-eval `resize` 
+function chrome() {
+eval `resize`
 EXITSTATUS=$?
 if [ $EXITSTATUS = 0 ]; then
 	status="0"

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function install_ceres {
+function install_ceres() {
   elevate_privilege "apt-get install cmake -y "
   elevate_privilege "apt-get install libgoogle-glog-dev"
   elevate_privilege "apt-get install libatlas-base-dev"
@@ -8,9 +8,8 @@ function install_ceres {
   elevate_privilege "apt-get install libsuitesparse-dev"
 
   echo_message info 'Downloading ceres_solver ...'
-  wget -c https://codeload.github.com/ceres-solver/ceres-solver/zip/master
-  unzip master
-  rm master
+  wget -O ceres_solver.zip -c https://codeload.github.com/ceres-solver/ceres-solver/zip/master
+  unzip ceres_solver.zip
   cd ceres-solver-master
   mkdir -p build
   cd build
@@ -24,7 +23,7 @@ function install_ceres {
   echo_message success "Installation of ceres_solver complete."
 }
 
-function ceres {
+function ceres() {
   # Variables
   NAME="ceres"
   PACKAGE=ceres
