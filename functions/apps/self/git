@@ -7,13 +7,13 @@ function install_git {
   elevate_privilege "apt update"
   elevate_privilege "apt install git -y"
 
-  echo_message info 'Configure '$NAME'...'
-  git config --global user.email "baoxianzhit@gmail.com"
-  git config --global user.name "baoxianzhang"
-  git config --global core.editor vim
-  git config --global push.default simple
-  git config --global alias.unstage "reset HEAD --"
-  git config --global alias.last "log -1 HEAD"
+#  echo_message info 'Configure '$NAME'...'
+#  git config --global user.email "baoxianzhit@gmail.com"
+#  git config --global user.name "baoxianzhang"
+#  git config --global core.editor vim
+#  git config --global push.default simple
+#  git config --global alias.unstage "reset HEAD --"
+#  git config --global alias.last "log -1 HEAD"
 
   echo_message success "Installation of '$PACKAGE' complete."
 }

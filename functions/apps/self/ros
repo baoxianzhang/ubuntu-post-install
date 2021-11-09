@@ -3,14 +3,25 @@
 # Download function for ease of reuse
 function install_ros() {
   echo_message info 'Installing '$NAME'...'
+  ## elevate_privilege "sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list' "
+  ## # if occur when apt-get update, "File has expected size, Mirror sync in progress? Please rm /var/lib/apt/lists and use another keyserver
+  ## # elevate_privilege "apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116"
+  ## elevate_privilege "apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116"
+  ## # elvate_privileage "apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116"
+  ## elevate_privilege "apt-get update"
+  ## elevate_privilege "apt-get -y -q install ros-$ROSDISTRO-desktop-full ros-$ROSDISTRO-catkin  ros-$ROSDISTRO-rosbash"
+  ## elevate_privilege "apt-get -y -q install python-wstool python-rosdep python-catkin-tools"
+
+  ## ubuntu20.04
   elevate_privilege "sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list' "
-  # if occur when apt-get update, "File has expected size, Mirror sync in progress? Please rm /var/lib/apt/lists and use another keyserver
-  # elevate_privilege "apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116"
-  elevate_privilege "apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116"
-  # elvate_privileage "apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116"
-  elevate_privilege "apt-get update"
-  elevate_privilege "apt-get -y -q install ros-$ROSDISTRO-desktop-full ros-$ROSDISTRO-catkin  ros-$ROSDISTRO-rosbash"
-  elevate_privilege "apt-get -y -q install python-wstool python-rosdep python-catkin-tools"
+  elevate_privilege "apt install -y curl"     # if you haven't already installed curl
+  ## curl may be failed due to the network, download ros.asc in the web, and sudo apt-key add ros.asc.
+  # curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | elevate_privilege "apt-key add -"
+  curl -s https://github.com/baoxianzhang/myfile/blob/master/ros.asc | elevate_privilege "apt-key add -"
+  elevate_privilege "apt update"
+  elevate_privilege "apt install -y ros-noetic-desktop-full"
+  elevate_privilege "apt install -y python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential"
+
   rosdep init
   rosdep update
   echo_message success "Installation of '$PACKAGE' complete."

@@ -22,7 +22,7 @@ function install_spacemacs() {
   # clean
   cd ..
   rm ${EMACS_VERSION} -rf
-  # rm ${EMACS_VERSION}.tar.gz
+  rm ${EMACS_VERSION}.tar.gz
 
   mkdir -p ~/bxgithub
   cd ~/bxgithub

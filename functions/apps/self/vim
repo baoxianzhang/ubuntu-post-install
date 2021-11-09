@@ -40,7 +40,7 @@ function install_vim() {
 
   # clean
   cd ../..
-  # rm vim.zip -rf
+  rm vim.zip -rf
   rm vim -rf
 
   echo_message success "Installation of '$PACKAGE' complete."

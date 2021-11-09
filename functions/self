@@ -8,7 +8,7 @@ dir=$(dirname "$0")
 # the following three contains self config
 source $dir/functions/apps/self/git
 source $dir/functions/apps/self/zsh
-source $dir/functions/apps/self/vim
+source $dir/functions/apps/self/vim          # not test well
 source $dir/functions/apps/self/myfile
 source $dir/functions/apps/self/spacemacs
 
@@ -17,7 +17,7 @@ source $dir/functions/apps/self/fzf
 source $dir/functions/apps/self/ros
 source $dir/functions/apps/self/gtag
 source $dir/functions/apps/self/sogou
-source $dir/functions/apps/self/cmake
+source $dir/functions/apps/self/cmake        # not test well
 source $dir/functions/apps/self/chrome
 source $dir/functions/apps/self/moeditor
 source $dir/functions/apps/self/typora

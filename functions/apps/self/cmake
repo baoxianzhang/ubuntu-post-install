@@ -14,6 +14,7 @@ function install_cmake() {
   # Cleanup and finish
   cd .. # back to the top directory
   rm -rf CMake-master
+  rm -rf cmake.zip
   echo_message success "Installation of '$PACKAGE' complete."
 }
 
