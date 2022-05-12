@@ -1,5 +1,12 @@
 #!/bin/bash
 
+
+## Some problem in ubuntu 20.04
+## E: Sub-process /usr/bin/dpkg returned an error code (1)
+## Solution:  https://blog.csdn.net/liam_dapaitou/article/details/90668542
+## sudo dpkg -i --force-overwirte xxx.deb
+## sudo apt-get -f install
+
 # Download function for ease of reuse
 function install_ros() {
   echo_message info 'Installing '$NAME'...'

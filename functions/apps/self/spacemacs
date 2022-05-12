@@ -4,7 +4,7 @@
 function install_spacemacs() {
   THIS_DIR=$(pwd)
   echo_message info 'Downloading '$NAME'...'
-  EMACS_VERSION=emacs-27.2
+  EMACS_VERSION=emacs-28.1
   wget -nc http://mirrors.ustc.edu.cn/gnu/emacs/${EMACS_VERSION}.tar.gz
   tar -xzvf ${EMACS_VERSION}.tar.gz
   cd ${EMACS_VERSION}
@@ -15,7 +15,7 @@ function install_spacemacs() {
   elevate_privilege "apt-get install -y libgif-dev"
   elevate_privilege "apt-get install -y libtiff5-dev"
   elevate_privilege "apt-get install -y gnutls-dev"
-  ./configure
+  ./configure --with-xml2
   make
   elevate_privilege "make install"
 
