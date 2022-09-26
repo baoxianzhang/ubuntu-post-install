@@ -25,3 +25,15 @@ aircrack-ng
 flameshot
 kdesvn
 enca
+octave
+octave-doc
+octave-symbolic
+octave-signal
+octave-optim
+octave-statistics
+octave-struct
+octave-linear-algebra
+octave-control
+octave-data-smoothing
+octave-image
+octave-io
