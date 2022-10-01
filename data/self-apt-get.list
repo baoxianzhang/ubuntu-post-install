@@ -18,7 +18,6 @@ kolourpaint4
 clang-format
 flameshot
 librecad
-octave
 gnuplot
 docker.io
 aircrack-ng
@@ -38,3 +37,4 @@ octave-data-smoothing
 octave-image
 octave-io
 fonts-freefont-otf
+net-tools
