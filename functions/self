@@ -21,7 +21,10 @@ source $dir/functions/apps/self/cmake        # not test well
 source $dir/functions/apps/self/chrome
 source $dir/functions/apps/self/moeditor
 source $dir/functions/apps/self/typora
+source $dir/functions/apps/self/nutstore
 source $dir/functions/apps/self/wps
+source $dir/functions/apps/self/wechat
+source $dir/functions/apps/self/feishu
 source $dir/functions/apps/self/shadowsocks
 source $dir/functions/apps/self/variety
 source $dir/functions/apps/self/autojump
@@ -45,7 +48,10 @@ function install_all() {
   moeditor
   typora
   shadowsocks
+  nutstore
   wps
+  wechat
+  feishu
   variety
   autojump
   gitbook
@@ -94,6 +100,8 @@ function thirdparty_packages {
                          'typora'       'typora, another awsome markdown tool' \
                          'shadowsocks'  'shadowsock network' \
                          'wps'          'wps, awsome office' \
+                         'wechat'        'wechat, linux version' \
+                         'feishu'        'feishu, linux version' \
                          'variety'      'variety, beautiful wallpaper' \
                          'gitbook'      'gitbook, easy markdown book' \
                          'freecad'      'open source CAD' \

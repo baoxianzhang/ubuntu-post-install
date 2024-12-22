@@ -1,35 +1,33 @@
 #!/bin/bash
 
-function install_sogou() {
+function install_feishu {
   echo_message info 'Downloading '$NAME'...'
-  elevate_privilege 'apt-get install fcitx -y'
-  elevate_privilege 'apt-get -f install'
-  sudo apt-get -f install
-  wget -O sogoupinyin_amd64.deb https://ime-sec.gtimg.com/202412221408/8edf490d79251e81b63d24e5282d7eb1/pc/dl/gzindex/1680521603/sogoupinyin_4.2.1.145_amd64.deb
+
+  wget -nc https://lf6-ug-sign.feishucdn.com/ee-appcenter/018b8d40/Feishu-linux_x64-7.28.10.deb?lk3s=fb957577&x-expires=1734851675&x-signature=zbQ6WffsWFHH9YkzloGcNhzIsr8%3D -O feishu.deb
+
   # Install package(s)
   echo_message info 'Installing '$NAME'...'
-  # elevate_privilege "dpkg -i sogoupinyin_amd64.deb"
-  elevate_privilege "gdebi sogoupinyin_amd64.deb"
+  elevate_privilege "gdebi feishu.deb"
+
   # Cleanup and finish
-  rm -rf sogoupinyin_amd64.deb
+  rm -rf feishu.deb
   echo_message success "Installation of '$PACKAGE' complete."
 }
 
-function sogou() {
+function feishu {
   # Variables
-  NAME="sogou"
-  PACKAGE=sogou
+  NAME="feishu"
+  PACKAGE=feishu
   # Install
   echo_message header 'Begin '$NAME' installation'
   # Check if package is installed
-  # check_packages $PACKAGE
-  # exitstatus=$?
-  exitstatus=1
+  check_packages $PACKAGE
+  exitstatus=$?
   # If package is not installed
   if [ $exitstatus = 1 ]; then
     echo_message info $NAME 'is not installed.'
     echo 'Proceeding'
-    install_sogou
+    install_feishu
     whiptail --title "Finished" --msgbox "Installation $NAME complete." 8 64
   else
     # Already installed
