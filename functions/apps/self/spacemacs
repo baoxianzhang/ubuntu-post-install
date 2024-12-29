@@ -15,7 +15,8 @@ function install_spacemacs() {
   elevate_privilege "apt-get install -y libgif-dev"
   elevate_privilege "apt-get install -y libtiff5-dev"
   elevate_privilege "apt-get install -y gnutls-dev"
-  ./configure --with-xml2
+  elevate_privilege "apt-get install -y libjansson-dev"
+  ./configure --with-xml2 --with-json
   make
   elevate_privilege "make install"
 
