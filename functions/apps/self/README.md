@@ -33,3 +33,26 @@ emacs编译需要config
 ./configure --with-json --with-xml2
 
 ```
+
+## 翻墙
+
+https://github.com/cfwtf/clash_for_windows/releases
+https://archive.org/download/clash_for_windows_pkg
+
+设置port
+Ghelp 获得clash链接。
+
+网络设置代理(或者setting->网络->代理）
+
+```
+export http_proxy="http://127.0.0.1:1080"
+export https_proxy="http://127.0.0.1:1080"
+export ALL_PROXY="socks5://127.0.0.1:1080"
+```
+
+
+
+
+
+
+
