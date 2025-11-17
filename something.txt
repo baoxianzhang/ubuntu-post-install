@@ -1,0 +1,49 @@
+# software
+bcompare
+code
+Feishu
+sogoupinyin
+TencentMeeting
+google-chrome
+teamviewer
+
+
+
+# qgis plugin
+GeoHey
+QuickMapServer, 这个在ubuntu20.04,没有高德地图，只有个osm
+
+Coordtransform
+Lat Lon Tools
+
+常用的功能：
+Create layer from point
+
+
+# python 安装
+## pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pandas
+## pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+tqdm
+loguru
+pandas
+folium
+haversine
+pymysql
+pypinyin
+selenium
+sklearn
+requests_toolbelt
+
+
+
+
+
+
+
+
+cyber_record
+pysqlite3
+shapely
+libsqlite3-dev
+sqlite3
+libsqlite3-mod-spatialite
